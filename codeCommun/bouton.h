@@ -13,7 +13,7 @@
  * #####                                          #####
  * #####  Le reste de cette section contient les  #####
  * #####   fonctions que nous jugeons utiles par  #####
- * #####        rapport a l'utilisation du        ##### 
+ * #####        rapport a l'utilisation du        #####
  * #####              bouton-poussoir             #####
  * ####################################################
  */
