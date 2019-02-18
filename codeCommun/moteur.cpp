@@ -5,6 +5,14 @@
  * Version: 1.1
  */
 
+const uint8_t PIND0 = 0 
+const uint8_t PIND1 = 1 
+const uint8_t PIND2 = 2 
+const uint8_t PIND3 = 3 
+const uint8_t PIND4 = 4 
+const uint8_t PIND5 = 5 
+const uint8_t PIND6 = 6 
+const uint8_t PIND7 = 7 
 
 
 void ajustementPWM ( uint8_t pourcentageOCR1A, pourcentageOCR1B ) 
@@ -31,4 +39,36 @@ void ajustementPWM ( uint8_t pourcentageOCR1A, pourcentageOCR1B )
 
     TCCR1C |= 0;
 
+}
+
+
+
+void ajustementDirectionRoues ( bool roueAAvance, bool roueBAvance ) 
+{
+    PORTD |=   roueAAvance << PIND7 | roueAAvance << PIND6
+    PORTD &= ~(roueAAvance << PIND7 | roueAAvance << PIND6)
+}
+
+
+
+void allumerMoteur(int pourcentage, int frequence, double duree)
+{
+    int allumer = pourcentage;
+    int fermer = 100 - allumer;
+
+    uint16_t nDelayLoop2 = ((1 / frequence) / 100) / 0.0000005
+
+    for (int i = 0; i < (duree * frequence); ++i)
+    {
+        for (int i = 0; i <= allumer; ++i)
+        {
+            PORTB = MOTEUR_ALLUME;
+            _delay_loop_2(nDelayLoop2);
+        }
+        for (int i = 0; i <= fermer; ++i)
+        {
+            PORTB = MOTEUR_ETEINT;
+            _delay_loop_2(nDelayLoop2);
+        }
+    }
 }

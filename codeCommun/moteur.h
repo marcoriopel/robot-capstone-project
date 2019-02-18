@@ -20,4 +20,22 @@
 
 
 
-void ajustementPWM ( uint8_t pourcentageOCR1A, pourcentageOCR1B ) 
+/*
+*    Ajustement du signal PWM pour chacune des roues 
+*    du robot en fonction d'un pourcentage respectif
+*/
+void ajustementPWM ( uint8_t pourcentageOCR1A, uint8_t pourcentageOCR1B ) 
+
+
+
+/*
+*    Ajustement de la direction des roues du robot en fonction 
+*/
+void ajustementDirectionRoues ( bool roueAAvance, bool roueBAvance ) 
+
+
+
+/*
+*   allume le moteur selon le poucentage, la frequence et la duree delimite par l'usager
+*/
+void allumerMoteur(uint8_t pourcentage, int frequence, double duree)
