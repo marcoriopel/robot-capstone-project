@@ -5,7 +5,10 @@
  * Version: 1.1
  */
 
+#define F_CPU 8000000UL
 #include "dell.h"
+#include <util/delay.h>
+
 
 void allumerLumiereRouge()
 {
@@ -19,10 +22,10 @@ void allumerLumiereVert()
 
 void allumerLumiereAmbre()
 {
-    while(true)
-    {
-        PORTB = ~PORTB;
-    }
+    PORTB = allumerLumiereVert;
+    _delay_ms(2);
+    PORTB = allumerLumiereRouge;
+    _delay_ms(1);
 }
 
 void fermerLumiere()

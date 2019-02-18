@@ -30,6 +30,8 @@ void allumerLumiereVert()
 
 /*
  *    Allumer la lumiere dell de couleur Ambree
+ *    Pour utiliser cette fonction, il faut qu'elle 
+ *    soit dans une boucle infinie
  */
 void allumerLumiereAmbre()
 
