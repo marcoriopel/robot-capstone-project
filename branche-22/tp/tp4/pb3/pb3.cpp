@@ -31,7 +31,7 @@ void ajustementPWM ( uint8_t pourcentage )
 
     // division d'horloge par 8 - implique une frequence de PWM fixe
 
-    TCCR1A |= (1 << COM1A1) | (1 << COM1A0) | (1 << COM1B1) | (1 << COM1B0) | (1 << WGM10) ;
+    TCCR1A |= (1 << COM1A1) | (0 << COM1A0) | (1 << COM1B1) | (0 << COM1B0) | (1 << WGM10) ;
 
     TCCR1B |=  (1 << CS11) ;
 
@@ -45,12 +45,15 @@ int main()
     DDRD = SORTIE;
     PORTD = 0x00;
 
-    uint8_t pourcentageMoteur = 0;
-    while(pourcentageMoteur <= 100)
+    uint8_t pourcentageMoteur = 100;
+    while(pourcentageMoteur >= 0)
     {
         ajustementPWM(pourcentageMoteur);
         _delay_ms(2000);
-        pourcentageMoteur += 25;
+        if (pourcentageMoteur != 0)
+        {
+             pourcentageMoteur -= 25; 
+        }
     }
 
     return 0;    
