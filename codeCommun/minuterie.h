@@ -17,7 +17,24 @@
  * ####################################################
  */
 
-void partirMinuterie ( uint16_t duree ) 
+
+
+/*
+ *    Le parametre a utilise dans ISR est: TIMER0_OVF0_vect
+ *    et la fonction ISR se code ainsi:
+ * 
+ *    _______________________________________________
+ *    |                                             |
+ *    |  ++overflowsCounter;                        |
+ *    |  if (overflowsCounter >= overflowsCompare)  |
+ *    |  {                                          |
+ *    |     minuterieEstExpiree = true;             |
+ *    |  }                                          |
+ *    |_____________________________________________|
+ * 
+ */
+void partirMinuterie_1 ( uint8_t secondes ) 
+
 
 
 /*
@@ -25,5 +42,5 @@ void partirMinuterie ( uint16_t duree )
  *    et la fonction se code en une seule ligne:
  *    minuterieEstExpiree = true;
  */
-void initialisationInterruptionMinuterie ( void ) 
+void partirMinuterie_2 ( uint8_t duree ) 
 

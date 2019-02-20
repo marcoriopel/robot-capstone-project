@@ -1,46 +1,63 @@
 /*
- * Nom: minuterie.h
+ * Nom: minuterie.cpp
  * auteur: Marc-Alain Tetreault & Samuel Ouvrard
  * cree le 18 fevrier 2019
  * Version: 1.1
  */
 
-void partirMinuterie ( uint16_t duree ) 
+#pragma once
+
+#define F_CPU 8000000UL
+#include <avr/io.h>
+#include <util/delay.h>
+#include "minuterie.h"
+
+volatile const double NB_OVERFLOWS_SECONDE = 30.64;
+volatile double overflowsCompare1 = 0;
+volatile bool minuterie1EstExpiree = false;
+volatile double overflowsCompare2 = 0;
+volatile bool minuterie2EstExpiree = false;
+
+void partirMinuterie_1 ( uint8_t secondes )
 {
-    minuterieEstExpiree = false;
+    minuterie1EstExpiree = false;
+    overflowsCompare = NB_OVERFLOWS_SECONDE * secondes
 
-    // mode CTC du timer 1 avec horloge divisée par 1024
-    // interruption après la durée spécifiée
+    // normal mode du timer 0 avec horloge divisée par 1024
+    // interruption a chaque fois que le TCNT0 atteint la valeur MAX (255) avec le 
 
-    TCNT1 = 0;
+    TCNT0 = 0;
 
-    OCR1A = duree;
+    OCR0A = 0;
 
-    TCCR1A = 0 ;
+    TCCR0A = 0 ;
 
-    TCCR1B = (1 << WGM12) | (1 << CS12) | (1 << CS10) ;
+    TCCR0B = (1 << CS02) | (1 << CS00) ;
 
-    TCCR1C = 0;
+    TCCR0C = 0;
 
-    TIMSK1 = 1 << OCIE1A ;
+    TIMSK0 = 1 << TOIE0 ;
 }
 
-void initialisationInterruptionMinuterie ( void ) 
+void partirMinuterie_2 ( uint8_t secondes ) 
 {
-    // On utilise cli pour bloquer toutes les interruptions pendant l'initialisation.
-    cli ();
+    minuterie2EstExpiree = false;
+    overflowsCompare = NB_OVERFLOWS_SECONDE * secondes
 
-    DDRD = 0b11011011; // On formate le port D pour que la pin 2 soit en lecture (bouton-poussoir)
+    // normal mode du timer 2 avec horloge divisée par 1024
+    // interruption a chaque fois que le TCNT2 atteint la valeur MAX (255) avec le 
 
-    // Cette procédure ajuste le registre EIMSK de l’ATmega324PA pour permettre les interruptions externes.
-    EIMSK |= (1 << INT0) ;
+    TCNT2 = 0;
 
-    // il faut sensibiliser les interruptions externes aux
-    // changements de niveau du bouton-poussoir
-    // en ajustant le registre EICRA
+    OCR2A = 0;
 
-    EICRA |= 0 << ISC01 | 1 << ISC00;
+    TCCR2A = 0 ;
 
-    // sei permet de recevoir à nouveau des interruptions.
-    sei ();
+    TCCR2B = (1 << CS22) | (1 << CS20) ;
+
+    TCCR2C = 0;
+
+    TIMSK2 = 1 << TOIE0 ;
 }
+
+

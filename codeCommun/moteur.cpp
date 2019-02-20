@@ -1,9 +1,16 @@
 /*
- * Nom: bouton.h
+ * Nom: moteur.cpp
  * auteur: Marc-Alain Tetreault & Samuel Ouvrard
  * cree le 18 fevrier 2019
  * Version: 1.1
  */
+
+#pragma once
+
+#define F_CPU 8000000UL
+#include <avr/io.h>
+#include <util/delay.h>
+#include "moteur.h"
 
 const uint8_t PIND0 = 0 
 const uint8_t PIND1 = 1 
@@ -45,8 +52,8 @@ void ajustementPWM ( uint8_t pourcentageOCR1A, pourcentageOCR1B )
 
 void ajustementDirectionRoues ( bool roueAAvance, bool roueBAvance ) 
 {
-    PORTD |=   roueAAvance << PIND7 | roueAAvance << PIND6
-    PORTD &= ~(roueAAvance << PIND7 | roueAAvance << PIND6)
+    PORTD |=   roueAAvance << PIND7 | roueAAvance << PIND6;
+    PORTD &= ~(roueAAvance << PIND7 | roueAAvance << PIND6);
 }
 
 

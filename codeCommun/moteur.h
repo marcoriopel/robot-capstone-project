@@ -1,5 +1,5 @@
 /*
- * Nom: bouton.h
+ * Nom: moteur.h
  * auteur: Marc-Alain Tetreault & Samuel Ouvrard
  * cree le 18 fevrier 2019
  * Version: 1.1

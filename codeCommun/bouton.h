@@ -22,25 +22,21 @@
 
 /*
 *    Debounce pour s'assurer de prendre une seule valeur lorsque le bouton est enfonce
-*    \return          bool
 */
 bool debounce()
 
 
 
 /*
-*    Initialisation de la routine d'interruption  
-*    pour une pression sur le bouton-poussoir
+*    Initialisation de la routine d'interruption 
+*    
+*    type
+*    (rising edge - type = 0 / any edge - type = 1 / any edge - type = 2)
+*
+*    vector
+*    (INT0_vect - vector = 0 / INT1_vect - type = 1 / INT2_vect - type = 2)
 */
-void initialisationInterruptionBouton_1 ( void ) 
-
-
-
-/*
-*    Initialisation de la routine d'interruption  
-*    pour tout changements de niveau du bouton-poussoir
-*/
-void initialisationInterruptionBouton_2 ( void ) 
+void initialisationInterruptionBouton (uint8_t type = 0, uint8_t vector = 0)  
 
 
 

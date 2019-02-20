@@ -5,8 +5,12 @@
  * Version: 1.1
  */
 
-#include "bouton.h"
+#pragma once
 
+#define F_CPU 8000000UL
+#include <avr/io.h>
+#include <util/delay.h>
+#include "bouton.h"
 
 
 bool debounce()
@@ -24,65 +28,39 @@ bool debounce()
 
 
 
-void initialisationInterruptionBouton_1 ( void ) 
+void initialisationInterruptionBouton (uint8_t type, uint8_t vector) 
 {
-    // cli est une routine qui bloque toutes les interruptions.
+    // bloque toutes les interruptions.
     cli ();
 
-
-    // configurer et choisir les ports pour les entrées
-    // et les sorties. DDRx... Initialisez bien vos variables
-
-    DDRD = 0b11111011; // On formate le port D pour que la pin 2 soit en lecture (bouton-poussoir)
+    // On formate le port D pour que la pin 2 soit en lecture (bouton-poussoir)
+    DDRD = 0b11111011; 
 
 
+    // ajuste le registre EIMSK pour permettre les interruptions externes
+    switch (vector)
+    {
+        case 0 : EIMSK |= (1 << INT0); break;  // vecteur INT0_vect
+        case 1 : EIMSK |= (1 << INT1); break;  // vecteur INT1_vect
+        case 2 : EIMSK |= (1 << INT2); break;  // vecteur INT2_vect
 
-    // cette procédure ajuste le registre EIMSK
-    // de l’ATmega324PA pour permettre les interruptions externes
-
-    EIMSK |= (1 << INT0) ;
+        default : EIMSK |= (1 << INT0); break; // vecteur INT0_vect
+    }
 
 
-    // il faut sensibiliser les interruptions externes aux
-    // changements de niveau du bouton-poussoir
-    // en ajustant le registre EICRA
+    // ajuste le registre EICRA pour definir ce qui declenchera l'interruption
+    switch (type)
+    {   
+        case 0 : EICRA |= 0 << (ISC01 + vector * 2) | 1 << (ISC00 + vector * 2); break;   // rising edge du bouton-poussoir
+        case 1 : EICRA |= 0 << (ISC01 + vector * 2) | 1 << (ISC00 + vector * 2); break;   // any edge du bouton-poussoir
+        case 2 : EICRA |= 1 << (ISC01 + vector * 2) | 0 << (ISC00 + vector * 2); break;   // falling edge du bouton-poussoir
 
-    EICRA |= 1 << ISC01 | 1 << ISC00;
+        default : EICRA |= 1 << (ISC01 + vector * 2) | 1 << (ISC00 + vector * 2); break;  // rising edge du bouton-poussoir
+    }
 
-    // sei permet de recevoir à nouveau des interruptions.
-    
+
+    // permet de recevoir à nouveau des interruptions.
     sei ();
 
 }
 
-
-
-void initialisationInterruptionBouton_2 ( void ) 
-{
-    // cli est une routine qui bloque toutes les interruptions.
-    cli ();
-
-
-    // configurer et choisir les ports pour les entrées
-    // et les sorties. DDRx... Initialisez bien vos variables
-
-    DDRD = 0b11111011; // On formate le port D pour que la pin 2 soit en lecture (bouton-poussoir)
-
-
-    // cette procédure ajuste le registre EIMSK
-    // de l’ATmega324PA pour permettre les interruptions externes
-
-    EIMSK |= (1 << INT0) ;
-
-
-    // il faut sensibiliser les interruptions externes aux
-    // changements de niveau du bouton-poussoir
-    // en ajustant le registre EICRA
-
-    EICRA |= 0 << ISC01 | 1 << ISC00;
-
-    // sei permet de recevoir à nouveau des interruptions.
-
-    sei ();
-
-}

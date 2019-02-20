@@ -5,6 +5,8 @@
  * Version: 1.1
  */
 
+#pragma once
+
 #define F_CPU 8000000UL
 #include "dell.h"
 #include <util/delay.h>
