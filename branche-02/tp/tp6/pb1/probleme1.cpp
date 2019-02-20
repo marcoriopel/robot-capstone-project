@@ -9,6 +9,7 @@ const uint8_t LUMIERE_ROUGE = 0b10101010;
 const uint8_t LUMIERE_VERTE = 0b01010101;
 const uint8_t LUMIERE_FERMEE = 0;
 const int DEBOUNCEDELAYMS = 10;
+uint16_t compteur;
 
 enum States
 {
@@ -21,178 +22,111 @@ enum States
 };
 
 States state = INIT;
-bool etaitAppuye = false;
 
-bool estAppuye()
-{
-    return !(PIND & 0x02);
-}
-
-bool debounce()
-{
-    if (estAppuye())
-    {
-        _delay_ms(DEBOUNCEDELAYMS);
-        if (estAppuye())
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-void doAction(States state)
-{
-    switch (state)
-    {
-    case INIT:
-    {
-        break;
-    }
-    case PRESS:
-    {
-        PORTA = LUMIERE_VERTE;
-        _delay_ms(2);
-        PORTA = LUMIERE_ROUGE;
-        _delay_ms(1);
-        break;
-    }
-    case UNPRESS:
-    {
-        PORTA = LUMIERE_VERTE;
-        break;
-    }
-    }
-}
-
-void stateSwitch(States &state)
-{
-    switch (state)
-    {
-    case INIT:
-    {
-        state = FIRSTPRESS;
-        break;
-    }
-    case FIRSTPRESS:
-    {
-        state = FIRSTUNPRESS;
-        break;
-    }
-    case FIRSTUNPRESS:
-    {
-        state = SECONDPRESS;
-        break;
-    }
-    case SECONDPRESS:
-    {
-        state = SECONDUNPRESS;
-        break;
-    }
-    case SECONDUNPRESS:
-    {
-        state = THIRDPRESS;
-        break;
-    }
-    case THIRDPRESS:
-    {
-        state = INIT;
-        break;
-    }
-    }
-}
-
-
-int main()
-{
-    DDRD = ENTREE;
-    DDRA = SORTIE;
-    while (true)
-    {
-        doAction(state);
-
-        if ((estAppuye()) && !etaitAppuye)
-        {
-            _delay_ms(10);
-            if (estAppuye())
-            {
-                etaitAppuye = true;
-                stateSwitch(state);
-            }
-        }
-        if (!(estAppuye()) && etaitAppuye)
-        {
-            _delay_ms(10);
-            if (!(estAppuye()))
-            {
-                etaitAppuye = false;
-                stateSwitch(state);
-            }
-        }
-    }
-    return 0;
-} 
-
-//Declaration d'un compteur
-uint16_t compteur;
-
-
-//Fonction pour savoir si le bouton-poussoir est appuye
-bool estAppuye()
+bool estAppuye() //Fonction qui determine si le bouton-poussoir est bel et bien enfonce
 {
     return !(PIND & 0x04);
 }
 
-
-//Utilisation d'un debounce pour s'assurer que le bouton est bel et bien appuye
-bool debounce()
+void doAction(States state) //Machine a etats qui sert uniquement a effectuer les actions pour chaque state
 {
-    if (estAppuye())
+    switch (state)
     {
-        _delay_ms(DEBOUNCEDELAYMS);
-        if (estAppuye())
+    case INIT: //On reinitialise le compteur a 0
+
+        PORTB = LUMIERE_FERMEE;
+        compteur = 0;
+        break;
+
+    case S1: //Tant que le bouton est enfonce, on incremente le compteur jusqu'a temps qu'on atteigne 120 ou que le bouton soit relache
+
+        compteur++;
+        _delay_ms(100);
+        break;
+
+    case S2: //On allume la lumiere verte pour 1/2 seconde
+
+        PORTB = LUMIERE_VERTE;
+        _delay_ms(500);
+        break;
+
+    case S3: //Rien ne se passe pour 2 secondes
+
+        PORTB = LUMIERE_FERMEE;
+        _delay_ms(2000);
+        break;
+
+    case S4: //la lumiere rouge clignote compteur/2 fois 2 fois par seconde
+
+        for (uint8_t i = 0; i < compteur / 2; i++)
         {
-            return true;
+            PORTB = LUMIERE_ROUGE;
+            _delay_ms(250);
+            PORTB = LUMIERE_FERMEE;
+            _delay_ms(250);
         }
+        break;
+
+    case S5: //On allume la lumiere verte pour 1 seconde
+
+        PORTB = LUMIERE_VERTE;
+        _delay_ms(1000);
+        break;
     }
-    return false;
+}
+
+void stateSwitch(States &state) //Machine a etats dont le but est uniquement de changer d'un etat a un autre
+{
+    switch (state)
+    {
+    case INIT:
+        if (estAppuye()) //Quand on appuie sur le bouton-poussoir, on change a S1
+        {
+            _delay_ms(10);
+            if (estAppuye())
+                state = S1;
+        }
+        break;
+
+    case S1:
+        if (!estAppuye() || compteur >= 120) //Quand on relache le bouton ou que le compteur atteint 120, on change a S2
+        {
+            _delay_ms(10);
+            if (!estAppuye() || compteur >= 120)
+                state = S2;
+        }
+        break;
+
+    case S2:
+
+        state = S3;
+        break;
+
+    case S3:
+
+        state = S4;
+        break;
+
+    case S4:
+
+        state = S5;
+        break;
+
+    case S5:
+
+        state = INIT;
+        break;
+    }
 }
 
 int main()
 {
-    while(true)
+    DDRD = ENTREE;
+    DDRB = SORTIE;
+    while (true) //Boucle infinie
     {
-        //On met le compteur a 0 a chaque debut de boucle
-        compteur = 0;
-
-        //Boucle jusqu'a ce que quelqu'un appuie sur le bouton-poussoir
-        do{}while(!debounce());
-
-        //Incrementation du compteur tant que le bouton est appuye ou jusqu'a ce que le compteur atteigne 120
-        while(debounce() && compteur < 120)
-        {
-            compteur++;
-            _delay_ms(100);
-        }
-
-        //Lumiere verte allumee pour 1/2 seconhttps://www.facebook.com/de puis deux secondes avec rien
-        PORTB = LUMIERE_VERTE;
-        _delay_ms(500);
-        PORTB = LUMIERE_FERMEE;
-        _delay_ms(2000);
-
-        for(uint8_t i = 0; i <= compteur/2; i++)
-        {
-            PORTB = LUMIERE_ROUGE;
-            _delay_ms(250)
-            PORTB = LUMIERE_FERMEE;
-            _delay_ms(250);
-            PORTB = LUMIERE_ROUGE;
-            _delay_ms(250);
-            PORTB = LUMIERE_FERMEE;
-            _delay_ms(250);
-        }
-        PORTB = LUMIERE_VERTE;
-        _delay_ms(1000);
+        doAction(state); //L'action du present etat est effectuee a chaque boucle
+        stateSwitch(state); //On change d'etat a chaque boucle
     }
+    return 0;
 }
