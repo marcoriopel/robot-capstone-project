@@ -7,7 +7,7 @@
 
 void partirMinuterie ( uint16_t duree ) 
 {
-    minuterieEstExpiree = false;
+    bool minuterieEstExpiree = false;
 
     // mode CTC du timer 1 avec horloge divisée par 1024
     // interruption après la durée spécifiée
