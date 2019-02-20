@@ -51,7 +51,7 @@ void ajustementDirectionRoues ( bool roueAAvance, bool roueBAvance )
 
 
 
-void allumerMoteur(int pourcentage, int frequence, double duree)
+void allumerMoteur(int pourcentage, int frequence, double duree) //Duree en secondes
 {
     int allumer = pourcentage;
     int fermer = 100 - allumer;
