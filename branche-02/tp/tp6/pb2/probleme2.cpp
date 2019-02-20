@@ -22,11 +22,11 @@ int main()
         uint8_t pos = 0;
         uint16_t quantiteLumiere = can.lecture(pos); //On lit la quantite de lumiere a l'aide de la classe fournie
 
-        if (quantiteLumiere >= 0x0000 && quantiteLumiere <= 0x0055) //Lumiere est basse donc lumiere verte
+        if (quantiteLumiere >= 0x0000 && quantiteLumiere <= 0x0133) //Lumiere est basse donc lumiere verte
         {
             PORTB = LUMIERE_VERTE;
         }
-        else if (quantiteLumiere >= 0x0056 && quantiteLumiere <= 0x00AA) //Lumiere est a un bon niveau donc ambre
+        else if (quantiteLumiere >= 0x0134 && quantiteLumiere <= 0x026D) //Lumiere est a un bon niveau donc ambre
         {
             //On met un delai entre rouge et vert pour creer la couleur ambre
             PORTB = LUMIERE_VERTE;
@@ -34,7 +34,7 @@ int main()
             PORTB = LUMIERE_ROUGE;
             _delay_ms(1);
         }
-        else if (quantiteLumiere >= 0x00AB && quantiteLumiere <= 0x00FF) //Lumiere est forte donc rouge
+        else if (quantiteLumiere >= 0x026E && quantiteLumiere <= 0x03FF) //Lumiere est forte donc rouge
         {
             PORTB = LUMIERE_ROUGE;
         }
