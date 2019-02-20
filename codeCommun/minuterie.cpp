@@ -20,12 +20,9 @@ volatile bool minuterie2EstExpiree = false;
 
 void partirMinuterie_1 ( uint8_t secondes )
 {
-<<<<<<< HEAD
     minuterie1EstExpiree = false;
     overflowsCompare = NB_OVERFLOWS_SECONDE * secondes
-=======
-    bool minuterieEstExpiree = false;
->>>>>>> bc780720dccbf6feaf30b71f0d1c6a9753a0233d
+
 
     // normal mode du timer 0 avec horloge divisée par 1024
     // interruption a chaque fois que le TCNT0 atteint la valeur MAX (255) avec le 
@@ -46,7 +43,7 @@ void partirMinuterie_1 ( uint8_t secondes )
 void partirMinuterie_2 ( uint8_t secondes ) 
 {
     minuterie2EstExpiree = false;
-    overflowsCompare = NB_OVERFLOWS_SECONDE * secondes
+    overflowsCompare = NB_OVERFLOWS_SECONDE * secondes;
 
     // normal mode du timer 2 avec horloge divisée par 1024
     // interruption a chaque fois que le TCNT2 atteint la valeur MAX (255) avec le 
