@@ -17,13 +17,16 @@
 #####      Details specifique a la cible       #####
 #####  Vous devez les adapter a votre projet   #####
 
+#Le path pour se rendre a la libraire
+LIBDIR= ../
+
 # Nom du microcontroleur cible
 # (exemple: 'at90s8515')
 MCU=atmega324pa
 
 # Nom de votre projet
 # (utilisez un seul mot, exemple: 'monprojet')
-PROJECTNAME=tp7
+PROJECTNAME=jaimemonrobot
 
 # Fichiers sources
 # Utilisez le suffixe .cpp pour les fichiers C++
@@ -32,7 +35,7 @@ PROJECTNAME=tp7
 PRJSRC= $(wildcard *.cpp)
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
-INC= -I$(path)
+INC= -I$(LIBDIR)
 
 # Libraires a lier (ex: -lmylib)
 LIBS= -l robot
@@ -110,7 +113,7 @@ CPPFILES=$(filter %.cpp, $(PRJSRC))
 OBJDEPS=$(CFILES:.c=.o) \
 	$(CPPFILES:.cpp=.o)
 	
-# Pour plus d'information sur cette section, consulter :
+# Pour plus d'information sur cettmain.cppe section, consulter :
 # http://bit.ly/257R53E	
 # Les fonctions $(filter patternâ€¦,text) &
 # $(patsubst pattern,replacement,text) sont pertinentes
@@ -127,7 +130,11 @@ OBJDEPS=$(CFILES:.c=.o) \
 
 # Make all permet simplement de compiler le projet
 #
-all: $(TRG)
+all: compileLibrairy $(TRG)
+
+#Compilation de la librairie
+compileLibrairy: makefile
+	cd $(LIBDIR); make
 
 # Implementation de la cible
 $(TRG): $(OBJDEPS)
