@@ -12,25 +12,36 @@
 #include <util/delay.h>
 
 
-void allumerLumiereRouge()
+enum DEL
 {
-    PORTB = 0b00000001;
-}
+    ROUGE,
+    VERT,
+    AMBRE,
+    ETEINT
+};
 
-void allumerLumiereVert()
-{
-    PORTB = 0b00000010;
-}
+const uint8_t SORTIE = 0b11111111;
+const uint8_t LUMIERE_ROUGE = 0b00000001;
+const uint8_t LUMIERE_VERTE = 0b00000010;
+const uint8_t LUMIERE_ETEINTE = 0b00000000;
 
-void allumerLumiereAmbre()
+void allumeDEL(DEL couleur)
 {
-    PORTB = allumerLumiereVert;
-    _delay_ms(2);
-    PORTB = allumerLumiereRouge;
-    _delay_ms(1);
-}
+    switch (couleur)
+    {
+        case ROUGE : PORTB = LUMIERE_ROUGE;
+        break;
 
-void fermerLumiere()
-{
-    PORTB = 0;
+        case VERT : PORTB = LUMIERE_VERTE;
+        break;
+
+        case AMBRE : PORTB = LUMIERE_VERTE;
+                    _delay_ms(2);
+                    PORTB = LUMIERE_ROUGE;
+                    _delay_ms(1);
+        break;
+
+        case ETEINT : PORTB = LUMIERE_ETEINTE;
+        break;
+    }  
 }
