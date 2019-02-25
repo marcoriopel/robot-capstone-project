@@ -110,7 +110,7 @@ CFILES=$(filter %.c, $(PRJSRC))
 CPPFILES=$(filter %.cpp, $(PRJSRC))
 
 # Liste de tout les fichiers objet que nous devons creer
-OBJDEPS=$(CFILES:.c=.o) \
+OBJDEPS= $(CFILES:.c=.o) \
 	$(CPPFILES:.cpp=.o)
 	
 # Pour plus d'information sur cettmain.cppe section, consulter :
@@ -135,7 +135,7 @@ all: $(TRG)
 
 # Implementation de la cible
 $(TRG): $(OBJDEPS)
-	$(ar) $(LIBFLAGS) $(PROJECTNAME) $(OBJDEPS) 
+	$(ar) $(LIBFLAGS) -o $(PROJECTNAME) $(OBJDEPS) 
 
 # Production des fichiers object
 # De C a objet

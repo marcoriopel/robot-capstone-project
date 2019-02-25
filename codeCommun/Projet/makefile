@@ -18,7 +18,7 @@
 #####  Vous devez les adapter a votre projet   #####
 
 #Le path pour se rendre a la libraire
-LIBDIR= ../
+LIBDIR= ../Librairie
 
 # Nom du microcontroleur cible
 # (exemple: 'at90s8515')

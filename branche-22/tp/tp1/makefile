@@ -108,7 +108,7 @@ CFILES=$(filter %.c, $(PRJSRC))
 CPPFILES=$(filter %.cpp, $(PRJSRC))
 
 # Liste de tout les fichiers objet que nous devons creer
-OBJDEPS=$(CFILES:.c=.o) \
+OBJDEPS= $(CFILES:.c=.o) \
 	$(CPPFILES:.cpp=.o)
 	
 # Pour plus d'information sur cette section, consulter :
