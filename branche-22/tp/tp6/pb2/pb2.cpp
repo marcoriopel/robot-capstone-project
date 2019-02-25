@@ -38,20 +38,20 @@ int main()
         uint8_t pos = 0;
         uint16_t quantiteLumiere = convertisseur.lecture(pos);
 
-        
+        quantiteLumiere = quantiteLumiere >> 2;
 
-        if (quantiteLumiere >= 0x0000 && quantiteLumiere <= 0x0133) //faible intensite de lumiere recu
+        if (quantiteLumiere >= 0x0000 && quantiteLumiere <= 0x0055) //faible intensite de lumiere recu
         {
             PORTB = LUMIERE_VERTE;
         }
-        else if(quantiteLumiere > 0x0133 && quantiteLumiere <= 0x026D) //moyenne intensite de lumiere recu
+        else if(quantiteLumiere > 0x0055 && quantiteLumiere <= 0x00AA) //moyenne intensite de lumiere recu
         {
             PORTB = LUMIERE_VERTE;
             _delay_ms(2);
             PORTB = LUMIERE_ROUGE;
             _delay_ms(1);
         }
-        else if(quantiteLumiere > 0x026D && quantiteLumiere <= 0x03FF) //grande intensite de lumiere recu
+        else if(quantiteLumiere > 0x0055 && quantiteLumiere <= 0x00FF) //grande intensite de lumiere recu
         {
             PORTB = LUMIERE_ROUGE;
         }
