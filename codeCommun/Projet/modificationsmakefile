@@ -1,0 +1,5 @@
+1. PRJSRC on le change a $(wildcard *.cpp) pour que ca compile tous les fichiers .cpp possibles
+
+2. LIBS on le met a -l robot: Notre librairie serait par exemple librobot.a et -l ca recherche pour un lib automatiquement.
+
+3. Dans INC, on fait -I suivi du path pour signifier l'endroit des includes qu'on veut faire

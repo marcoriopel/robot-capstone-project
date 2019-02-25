@@ -14,29 +14,16 @@
  * #####   fonctions que nous jugeons utiles par  #####
  * #####        rapport a l'utilisation du        ##### 
  * #####           de la lumiere dell             #####
+ * #####       (La DEL doit être branchée         #####
+ * #####        à PIN0 et PIN1 du port B)         #####
  * ####################################################
  */
 
 
 /*
- *    Allumer la lumiere dell de couleur Rouge
+ *    Allumer la lumiere dell de la couleur voulue
+ *    selon l'enum DEL {ROUGE, VERT, AMBRE, ETEINT}
+ *    si on allume la DEL de couleur ambre il faut 
+ *    que la fonction soit dans une boucle infinie
  */
-void allumerDELRouge()
-
-/*
- *    Allumer la lumiere dell de couleur Verte
- */
-void allumerDELVert()
-
-/*
- *    Allumer la lumiere dell de couleur Ambree
- *    Pour utiliser cette fonction, il faut qu'elle 
- *    soit dans une boucle infinie
- */
-void allumerDELAmbre()
-
-
-/*
- *    Fermer la lumiere dell
- */
-void fermerDEL()
+void allumerDEL(DEL couleur)
