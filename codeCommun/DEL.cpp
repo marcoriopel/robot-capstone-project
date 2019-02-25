@@ -12,17 +12,17 @@
 #include <util/delay.h>
 
 
-void allumerLumiereRouge()
+void allumeDELRouge()
 {
     PORTB = 0b00000001;
 }
 
-void allumerLumiereVert()
+void allumerDELVert()
 {
     PORTB = 0b00000010;
 }
 
-void allumerLumiereAmbre()
+void allumerDELAmbre()
 {
     PORTB = allumerLumiereVert;
     _delay_ms(2);
@@ -30,7 +30,7 @@ void allumerLumiereAmbre()
     _delay_ms(1);
 }
 
-void fermerLumiere()
+void fermerDEL()
 {
     PORTB = 0;
 }

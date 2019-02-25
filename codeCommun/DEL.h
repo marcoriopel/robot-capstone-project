@@ -21,22 +21,22 @@
 /*
  *    Allumer la lumiere dell de couleur Rouge
  */
-void allumerLumiereRouge()
+void allumerDELRouge()
 
 /*
  *    Allumer la lumiere dell de couleur Verte
  */
-void allumerLumiereVert()
+void allumerDELVert()
 
 /*
  *    Allumer la lumiere dell de couleur Ambree
  *    Pour utiliser cette fonction, il faut qu'elle 
  *    soit dans une boucle infinie
  */
-void allumerLumiereAmbre()
+void allumerDELAmbre()
 
 
 /*
  *    Fermer la lumiere dell
  */
-void fermerLumiere()
+void fermerDEL()
