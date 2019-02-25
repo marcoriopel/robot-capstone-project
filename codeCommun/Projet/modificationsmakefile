@@ -3,3 +3,5 @@
 2. LIBS on le met a -l robot: Notre librairie serait par exemple librobot.a et -l ca recherche pour un lib automatiquement.
 
 3. Dans INC, on fait -I suivi du path pour signifier l'endroit des includes qu'on veut faire
+
+4. ajout de la fonction compileLibrairy dans make all qui avec la ligne de commande "cd $(LIBDIR); make" cette ligne de commande va dans le dossier librairie et make pour recompiler la librairie si necessaire

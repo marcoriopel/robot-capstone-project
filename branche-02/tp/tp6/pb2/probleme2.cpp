@@ -9,6 +9,8 @@ const uint8_t ENTREE = 0b00000000;
 const uint8_t LUMIERE_ROUGE = 0b10101010;
 const uint8_t LUMIERE_VERTE = 0b01010101;
 const uint8_t LUMIERE_FERMEE = 0;
+const uint8_t NIVEAU_AMBRE = 120; //Les niveaux ont ete choisis en effectuant des tests de lumiere en laboratoire
+const uint8_t NIVEAU_ROUGE = 205; 
 
 int main()
 {
@@ -20,13 +22,13 @@ int main()
     while (true)
     {
         uint8_t pos = 0;
-        uint16_t quantiteLumiere = can.lecture(pos); //On lit la quantite de lumiere a l'aide de la classe fournie
+        uint16_t quantiteLumiere = (can.lecture(pos) >> 2); //On lit la quantite de lumiere a l'aide de la classe fournie
 
-        if (quantiteLumiere >= 0x0000 && quantiteLumiere <= 0x0133) //Lumiere est basse donc lumiere verte
+        if (quantiteLumiere > NIVEAU_ROUGE) //Lumiere est forte donc lumiere rouge
         {
-            PORTB = LUMIERE_VERTE;
+            PORTB = LUMIERE_ROUGE;
         }
-        else if (quantiteLumiere >= 0x0134 && quantiteLumiere <= 0x026D) //Lumiere est a un bon niveau donc ambre
+        else if (quantiteLumiere > NIVEAU_AMBRE) //Lumiere est a un bon niveau donc ambre
         {
             //On met un delai entre rouge et vert pour creer la couleur ambre
             PORTB = LUMIERE_VERTE;
@@ -34,9 +36,9 @@ int main()
             PORTB = LUMIERE_ROUGE;
             _delay_ms(1);
         }
-        else if (quantiteLumiere >= 0x026E && quantiteLumiere <= 0x03FF) //Lumiere est forte donc rouge
+        else //Lumiere est basse donc verte
         {
-            PORTB = LUMIERE_ROUGE;
+            PORTB = LUMIERE_VERTE;
         }
     }
     return 0;
