@@ -27,3 +27,14 @@
  *    que la fonction soit dans une boucle infinie
  */
 void allumerDEL(DEL couleur)
+
+/*
+ *    Allume la lumiere dell de la couleur selon 
+ *    l'intensite de lumiere percu par la cellule 
+ *    photovoltaique
+ *
+ *    ROUGE  si faible intensite
+ *    AMBREE si moyenne intensite
+ *    VERTE  si forte intensite
+ */
+void detecterLum()

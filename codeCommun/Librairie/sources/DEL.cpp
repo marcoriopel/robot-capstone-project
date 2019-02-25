@@ -10,6 +10,7 @@
 #define F_CPU 8000000UL
 #include "dell.h"
 #include <util/delay.h>
+#include "can.h"
 
 
 enum DEL
@@ -44,4 +45,35 @@ void allumeDEL(DEL couleur)
         case ETEINT : PORTB = LUMIERE_ETEINTE;
         break;
     }  
+}
+
+
+
+
+can convertisseur;
+
+void detecterLum()
+{
+    uint8_t pos = 0;
+    uint16_t quantiteLumiere = convertisseur.lecture(pos);
+
+    quantiteLumiere = quantiteLumiere >> 2;
+
+    if (quantiteLumiere >= 0x0000 && quantiteLumiere <= 0x0055) //faible intensite de lumiere recu
+    {
+        allumerDEL(ROUGE);
+    }
+    else if(quantiteLumiere > 0x0055 && quantiteLumiere <= 0x00AA) //moyenne intensite de lumiere recu
+    {
+        allumerDEL(VERTE);
+        _delay_ms(2);
+        allumerDEL(ROUGE);
+        _delay_ms(1);
+    }
+    else if(quantiteLumiere > 0x0055 && quantiteLumiere <= 0x00FF) //grande intensite de lumiere recu
+    {
+        allumerDEL(VERT);
+    }
+    else
+        allumerDEL(ETEINT);
 }
