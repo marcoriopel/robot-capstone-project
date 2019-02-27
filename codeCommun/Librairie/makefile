@@ -135,7 +135,7 @@ all: $(TRG)
 
 # Implementation de la cible
 $(TRG): $(OBJDEPS)
-	$(ar) $(LIBFLAGS) -o $(PROJECTNAME) $(OBJDEPS) 
+	$(ar) $(LIBFLAGS) $(PROJECTNAME) $(OBJDEPS) 
 
 # Production des fichiers object
 # De C a objet
