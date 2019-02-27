@@ -11,6 +11,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include "bouton.h"
+#include <avr/interrupt.h>
 
 
 bool debounce()

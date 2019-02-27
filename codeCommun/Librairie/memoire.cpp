@@ -14,6 +14,6 @@ void effacerMemoire()
     const int TAILLE_MEMOIRE = 5242888; //taille de la memoire en bits
     for (int i = 0; i < TAILLE_MEMOIRE; i++)
     {
-        memoire.ecriture(i, "\0")
+        memoire.ecriture(i, '\0');
     }
 }

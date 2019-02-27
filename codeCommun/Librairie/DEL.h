@@ -19,7 +19,13 @@
  * ####################################################
  */
 
-
+enum couleur
+{
+    ROUGE,
+    VERT,
+    AMBRE,
+    ETEINT
+};
 
 /*
  *    Allumer la lumiere dell de la couleur voulue
@@ -27,7 +33,7 @@
  *    si on allume la DEL de couleur ambre il faut 
  *    que la fonction soit dans une boucle infinie
  */
-void allumerDEL(DEL couleur)
+void allumerDEL(couleur couleur);
 
 /*
  *    Allume la lumiere dell de la couleur selon 
@@ -38,4 +44,4 @@ void allumerDEL(DEL couleur)
  *    AMBREE si moyenne intensite
  *    VERTE  si forte intensite
  */
-void detecterLum()
+void detecterLum();

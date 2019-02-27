@@ -8,25 +8,17 @@
 #pragma once
 
 #define F_CPU 8000000UL
-#include "dell.h"
+#include "DEL.h"
 #include <util/delay.h>
 #include "can.h"
 
-
-enum DEL
-{
-    ROUGE,
-    VERT,
-    AMBRE,
-    ETEINT
-};
 
 const uint8_t SORTIE = 0b11111111;
 const uint8_t LUMIERE_ROUGE = 0b00000001;
 const uint8_t LUMIERE_VERTE = 0b00000010;
 const uint8_t LUMIERE_ETEINTE = 0b00000000;
 
-void allumeDEL(DEL couleur)
+void allumeDEL(couleur couleur)
 {
     switch (couleur)
     {
@@ -65,7 +57,7 @@ void detecterLum()
     }
     else if(quantiteLumiere > 0x0055 && quantiteLumiere <= 0x00AA) //moyenne intensite de lumiere recu
     {
-        allumerDEL(VERTE);
+        allumerDEL(VERT);
         _delay_ms(2);
         allumerDEL(ROUGE);
         _delay_ms(1);

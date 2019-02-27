@@ -10,6 +10,7 @@
 #define F_CPU 8000000UL
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 #include "minuterie.h"
 
 const double NB_OVERFLOWS_SECONDE = 30.64;
@@ -20,7 +21,7 @@ volatile bool minuterie2EstExpiree = false;
 
 void partirMinuterie_1 ( uint8_t secondes )
 {
-    overflowsCompare1 = NB_OVERFLOWS_SECONDE * secondes
+    overflowsCompare1 = NB_OVERFLOWS_SECONDE * secondes;
 
 
     // normal mode du timer 0 avec horloge divisée par 1024
@@ -33,8 +34,6 @@ void partirMinuterie_1 ( uint8_t secondes )
     TCCR0A = 0 ;
 
     TCCR0B = (1 << CS02) | (1 << CS00) ;
-
-    TCCR0C = 0;
 
     TIMSK0 = 1 << TOIE0 ;
 }
@@ -53,8 +52,6 @@ void partirMinuterie_2 ( uint8_t secondes )
     TCCR2A = 0 ;
 
     TCCR2B = (1 << CS22) | (1 << CS20) ;
-
-    TCCR2C = 0;
 
     TIMSK2 = 1 << TOIE0 ;
 }

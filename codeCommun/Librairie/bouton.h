@@ -18,12 +18,25 @@
  * ####################################################
  */
 
+enum type
+{
+    RISING_EDGE;
+    ANY_EDGE;
+    FALLING_EDGE;
+};
+
+enum vecteur
+{
+    INT0_vect;
+    INT1_vect;
+    INT2_vect;
+};
 
 
 /*
 *    Debounce pour s'assurer de prendre une seule valeur lorsque le bouton est enfonce
 */
-bool debounce()
+bool debounce();
 
 
 
@@ -31,12 +44,12 @@ bool debounce()
 *    Initialisation de la routine d'interruption 
 *    
 *    type
-*    (rising edge - type = 0 / any edge - type = 1 / any edge - type = 2)
+*    (rising edge - type = 0 / any edge - type = 1 / falling edge - type = 2)
 *
 *    vector
 *    (INT0_vect - vector = 0 / INT1_vect - type = 1 / INT2_vect - type = 2)
 */
-void initInterruptionBouton (uint8_t type = 0, uint8_t vector = 0)  
+void initInterruptionBouton (type type = RISING_EDGE, vecteur vecteur = INT0_vect);  
 
 
 

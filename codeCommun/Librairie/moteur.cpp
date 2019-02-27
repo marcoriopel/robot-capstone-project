@@ -12,17 +12,11 @@
 #include <util/delay.h>
 #include "moteur.h"
 
-const uint8_t PIND0 = 0 
-const uint8_t PIND1 = 1 
-const uint8_t PIND2 = 2 
-const uint8_t PIND3 = 3 
-const uint8_t PIND4 = 4 
-const uint8_t PIND5 = 5 
-const uint8_t PIND6 = 6 
-const uint8_t PIND7 = 7 
+const uint8_t MOTEUR_ALLUME = 0b00000011;
+const uint8_t MOTEUR_ETEINT = 0;
 
 
-void ajustementPWM ( uint8_t pourcentageOCR1A, pourcentageOCR1B ) 
+void ajustementPWM ( uint8_t pourcentageOCR1A, uint8_t pourcentageOCR1B ) 
 {
 
     // mise à un des sorties OC1A et OC1B sur comparaison
@@ -63,7 +57,7 @@ void allumerMoteur(int pourcentage, int frequence, double duree) //Duree en seco
     int allumer = pourcentage;
     int fermer = 100 - allumer;
 
-    uint16_t nDelayLoop2 = ((1 / frequence) / 100) / 0.0000005
+    uint16_t nDelayLoop2 = ((1 / frequence) / 100) / 0.0000005;
 
     for (int i = 0; i < (duree * frequence); ++i)
     {
