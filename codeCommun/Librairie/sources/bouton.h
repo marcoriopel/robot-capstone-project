@@ -36,7 +36,7 @@ bool debounce()
 *    vector
 *    (INT0_vect - vector = 0 / INT1_vect - type = 1 / INT2_vect - type = 2)
 */
-void initialisationInterruptionBouton (uint8_t type = 0, uint8_t vector = 0)  
+void initInterruptionBouton (uint8_t type = 0, uint8_t vector = 0)  
 
 
 

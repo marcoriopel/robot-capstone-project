@@ -28,7 +28,7 @@ bool debounce()
 
 
 
-void initialisationInterruptionBouton (uint8_t type, uint8_t vector) 
+void initInterruptionBouton (uint8_t type, uint8_t vector) 
 {
     // bloque toutes les interruptions.
     cli ();
