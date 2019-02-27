@@ -30,7 +30,7 @@ PROJECTNAME=librobot.a
 # Utilisez le suffixe .cpp pour les fichiers C++
 # Listez tous les fichiers a compiler, separes par
 # un espace. exemple: 'tp1.c tp2.cpp':
-PRJSRC= $(wildcard /sources*.cpp)
+PRJSRC= $(wildcard ./sources/*.cpp)
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
 INC= 
@@ -94,11 +94,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 ####### Cible (Target) #######
 
 #Nom des cibles par defaut
-TRG=$(PROJECTNAME).out
-HEXROMTRG=$(PROJECTNAME).hex
-HEXTRG=$(HEXROMTRG) $(PROJECTNAME).ee.hex
-
-
+TRG=$(PROJECTNAME)
 
 ####### Definition de tout les fichiers objets #######
 
@@ -151,17 +147,6 @@ $(TRG): $(OBJDEPS)
 # Pour plus d'information sur cette section, consulter:
 # http://bit.ly/2580FU8
 
-# Production des fichiers hex a partir des fichiers elf
-%.hex: %.out
-	$(OBJCOPY) -j .text -j .data \
-		-O $(HEXFORMAT) $< $@
-
-# Make install permet de compiler le projet puis
-# d'ecrire le programme en memoire flash dans votre
-# microcontroleur. Celui-ci doit etre branche par cable USB
-install: $(HEXROMTRG)				
-	$(AVRDUDE) -c $(AVRDUDE_PROGRAMMERID)   \
-	-p $(MCU) -P -e -U flash:w:$(HEXROMTRG)
 
 # Make clean permet d'effacer tout les fichiers generes
 # lors de la compilation
