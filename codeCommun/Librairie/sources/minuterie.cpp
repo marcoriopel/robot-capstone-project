@@ -12,7 +12,7 @@
 #include <util/delay.h>
 #include "minuterie.h"
 
-volatile const double NB_OVERFLOWS_SECONDE = 30.64;
+const double NB_OVERFLOWS_SECONDE = 30.64;
 volatile double overflowsCompare1 = 0;
 volatile bool minuterie1EstExpiree = false;
 volatile double overflowsCompare2 = 0;
@@ -20,8 +20,7 @@ volatile bool minuterie2EstExpiree = false;
 
 void partirMinuterie_1 ( uint8_t secondes )
 {
-    minuterie1EstExpiree = false;
-    overflowsCompare = NB_OVERFLOWS_SECONDE * secondes
+    overflowsCompare1 = NB_OVERFLOWS_SECONDE * secondes
 
 
     // normal mode du timer 0 avec horloge divisée par 1024
@@ -42,8 +41,7 @@ void partirMinuterie_1 ( uint8_t secondes )
 
 void partirMinuterie_2 ( uint8_t secondes ) 
 {
-    minuterie2EstExpiree = false;
-    overflowsCompare = NB_OVERFLOWS_SECONDE * secondes;
+    overflowsCompare2 = NB_OVERFLOWS_SECONDE * secondes;
 
     // normal mode du timer 2 avec horloge divisée par 1024
     // interruption a chaque fois que le TCNT2 atteint la valeur MAX (255) avec le 

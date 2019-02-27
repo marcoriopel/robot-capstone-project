@@ -33,7 +33,7 @@
  *    |_____________________________________________|
  * 
  */
-void partirMinuterie_1 ( uint8_t secondes ) 
+void partirMinuterie_1 ( uint8_t secondes ); 
 
 
 
@@ -42,5 +42,5 @@ void partirMinuterie_1 ( uint8_t secondes )
  *    et la fonction se code en une seule ligne:
  *    minuterieEstExpiree = true;
  */
-void partirMinuterie_2 ( uint8_t duree ) 
+void partirMinuterie_2 ( uint8_t duree ); 
 
