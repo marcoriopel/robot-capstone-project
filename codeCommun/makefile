@@ -51,6 +51,6 @@ cleanLib: makefile
 	cd $(LIB_dir); make clean
 
 # Nettoyer les dossiers
-install: $(HEXROMTRG)				
+install: ihex				
 	avrdude -c usbasp   \
 	-p atmega324pa -P -e -U flash:w:ihex
