@@ -42,11 +42,15 @@ $(TRG): $(OBJ)
 $(BUILD_dir)/%.o: $(SRC_dir)/%.cpp
 	$(CC) -c $< -o $@ $(CFLAGS) 
 
+
+
 # Afficher les variables
 vars:
 	@echo "SRC = $(SRC)"
 	@echo "OBJ = $(OBJ)"
 	@echo "TRG = $(TRG)"
+
+
 
 # Nettoyer les dossiers
 clean: cleanLib
@@ -55,7 +59,13 @@ clean: cleanLib
 cleanLib: makefile
 	cd $(LIB_dir); make clean
 
+
+
 # installer l'executable sur le robot
 install: $(HEXROMTRG)				
 	avrdude -c usbasp   \
 	-p atmega324pa -P -e -U flash:w:$(HEXROMTRG)
+
+%.hex: %.out
+	avr-objcopy -j .text -j .data \
+		-O ihex $< $@

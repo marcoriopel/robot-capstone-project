@@ -1,8 +1,9 @@
+
 #include <DEL.h>
 
 int main()
 {
-    allumerDEL(VERT);
+    allumerDEL(AMBRE); 
 
     return 0;
 }

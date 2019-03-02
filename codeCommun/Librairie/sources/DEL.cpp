@@ -11,6 +11,8 @@
 #include "DEL.h"
 #include <util/delay.h>
 #include "can.h"
+#include <avr/io.h>
+
 
 
 const uint8_t SORTIE = 0b11111111;
@@ -20,6 +22,7 @@ const uint8_t LUMIERE_ETEINTE = 0b00000000;
 
 void allumerDEL(couleur couleur)
 {
+    DDRB = SORTIE;
     switch (couleur)
     {
         case ROUGE : PORTB = LUMIERE_ROUGE;
@@ -28,10 +31,12 @@ void allumerDEL(couleur couleur)
         case VERT : PORTB = LUMIERE_VERTE;
         break;
 
-        case AMBRE : PORTB = LUMIERE_VERTE;
-                    _delay_ms(2);
-                    PORTB = LUMIERE_ROUGE;
-                    _delay_ms(1);
+        case AMBRE : while(true){
+                         PORTB = LUMIERE_VERTE;
+                        _delay_ms(2);
+                        PORTB = LUMIERE_ROUGE;
+                        _delay_ms(1);
+                    }       
         break;
 
         case ETEINT : PORTB = LUMIERE_ETEINTE;
