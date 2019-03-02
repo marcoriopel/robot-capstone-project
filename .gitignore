@@ -1,14 +1,11 @@
-#ignore les fichiers .o dans le git
+#ignore les fichiers .o .out .d .out.map et .hex dans le git
 *.o
 
-#ignore les fichiers .out dans le git
 *.out
 
-#ignore les fichiers .d dans le git
 *.d
 
-#ignore les fichiers .out.map dans le git
 *.out.map
 
-#ignore les fichiers .hex dans le git
 *.hex
+

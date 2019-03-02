@@ -27,6 +27,7 @@ enum couleur
     ETEINT
 };
 
+
 /*
  *    Allumer la lumiere dell de la couleur voulue
  *    selon l'enum DEL {ROUGE, VERT, AMBRE, ETEINT}
@@ -34,6 +35,7 @@ enum couleur
  *    que la fonction soit dans une boucle infinie
  */
 void allumerDEL(couleur couleur);
+
 
 /*
  *    Allume la lumiere dell de la couleur selon 

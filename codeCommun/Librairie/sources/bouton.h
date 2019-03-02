@@ -20,16 +20,16 @@
 
 enum type
 {
-    RISING_EDGE;
-    ANY_EDGE;
-    FALLING_EDGE;
+    RISING_EDGE,
+    ANY_EDGE,
+    FALLING_EDGE
 };
 
 enum vecteur
 {
-    INT0_vect;
-    INT1_vect;
-    INT2_vect;
+    INT0_vect,
+    INT1_vect,
+    INT2_vect
 };
 
 

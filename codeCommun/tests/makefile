@@ -38,7 +38,7 @@ PRJSRC= $(wildcard *.cpp)
 INC= -I$(LIBDIR)
 
 # Libraires a lier (ex: -lmylib)
-LIBS= -lrobot -L$(LIBDIR)
+LIBS= -L$(LIBDIR) -lrobot 
 # Niveau d'optimization
 # Utilisez s (size opt), 1, 2, 3 ou 0 (off)
 OPTLEVEL=s
@@ -147,7 +147,7 @@ $(TRG): $(OBJDEPS)
 	$(CC) $(CFLAGS) -c $<
 # De C++ a objet
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(CXXFLAGS) -c $<
+	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< $(INC)
 
 # Verification des dependances (header dependencies)
 -include *.d
