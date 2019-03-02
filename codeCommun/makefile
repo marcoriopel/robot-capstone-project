@@ -4,13 +4,18 @@
 ####### variables #######
 SRC_dir = tests/sources
 BUILD_dir = tests/build
-TRG = executable.out
+PROJECTNAME = test
 LIB_inc = ./Librairie/sources
 LIB_dir = ./Librairie
 LIB_name = anane 
 
 CC = avr-gcc
 
+
+#Nom des cibles par defaut
+TRG=$(PROJECTNAME).out
+HEXROMTRG=$(PROJECTNAME).hex
+HEXTRG=$(HEXROMTRG) $(PROJECTNAME).ee.hex
 
 ####### flags #######
 CFLAGS = -I $(LIB_inc)
@@ -45,12 +50,12 @@ vars:
 
 # Nettoyer les dossiers
 clean: cleanLib
-	rm $(BUILD_dir)/*.o *.out
+	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG)
 	
 cleanLib: makefile
 	cd $(LIB_dir); make clean
 
 # installer l'executable sur le robot
-install: ihex				
+install: $(HEXROMTRG)				
 	avrdude -c usbasp   \
-	-p atmega324pa -P -e -U flash:w:ihex
+	-p atmega324pa -P -e -U flash:w:$(HEXROMTRG)

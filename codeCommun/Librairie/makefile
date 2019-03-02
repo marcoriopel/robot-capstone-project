@@ -42,4 +42,4 @@ vars:
 
 # Nettoyer les dossiers
 clean: 
-	rm $(BUILD_dir)/*.o $(TRG)
+	rm -f $(BUILD_dir)/*.o $(TRG)
