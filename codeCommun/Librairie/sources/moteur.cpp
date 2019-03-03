@@ -16,7 +16,7 @@ const uint8_t MOTEUR_ALLUME = 0b00000011;
 const uint8_t MOTEUR_ETEINT = 0;
 
 
-void ajustementPWM ( uint8_t pourcentageOCR1A, uint8_t pourcentageOCR1B ) 
+void ajustementPWM ( uint8_t pourcentageRoueA, uint8_t pourcentageRoueB ) 
 {
 
     // mise à un des sorties OC1A et OC1B sur comparaison
@@ -27,9 +27,9 @@ void ajustementPWM ( uint8_t pourcentageOCR1A, uint8_t pourcentageOCR1B )
 
     // page 177 de la description technique du ATmega324PA)
 
-    OCR1A = (255 * pourcentageOCR1A) / 100 ;
+    OCR1A = (255 * pourcentageRoueA) / 100 ;
 
-    OCR1B = (255 * pourcentageOCR1B) / 100 ;
+    OCR1B = (255 * pourcentageRoueB) / 100 ;
 
 
     // division d'horloge par 8 - implique une frequence de PWM fixe
