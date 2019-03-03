@@ -6,7 +6,9 @@ SRC_dir = sources
 BUILD_dir = build
 TRG = libanane.a
 
+# Nom du compilateur
 CC = avr-gcc
+# Nom de l'archiveur
 AR = avr-ar
 # Nom du microcontroleur cible
 MCU=atmega324pa
@@ -21,6 +23,10 @@ CFLAGS = -g -mmcu=$(MCU) -O$(OPTLEVEL) \
 	-funsigned-bitfields -funsigned-char    \
 	-Wall 
 
+# Flags pour le compilateur en C++
+CXXFLAGS=-fno-exceptions 
+
+# Flags pour la creation de la librairie
 LIBFLAGS = -csr
 
 
@@ -40,7 +46,7 @@ $(TRG): $(OBJ)
 	$(AR) $(LIBFLAGS) -o $@ $(OBJ)
 
 $(BUILD_dir)/%.o: $(SRC_dir)/%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@ 
 
 # Afficher les variables
 vars:
