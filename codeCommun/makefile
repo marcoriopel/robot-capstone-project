@@ -9,8 +9,12 @@ LIB_inc = ./Librairie/sources
 LIB_dir = ./Librairie
 LIB_name = anane 
 
+#Nom du compilateur
 CC = avr-gcc
-
+# Nom du microcontroleur cible
+MCU=atmega324pa
+# Niveau d'optimization
+OPTLEVEL=s
 
 #Nom des cibles par defaut
 TRG=$(PROJECTNAME).out
@@ -18,13 +22,24 @@ HEXROMTRG=$(PROJECTNAME).hex
 HEXTRG=$(HEXROMTRG) $(PROJECTNAME).ee.hex
 
 ####### flags #######
-CFLAGS = -I $(LIB_inc)
+# Flags pour le compilateur en C
+CFLAGS = -I $(INC) -g -mmcu=$(MCU) -O$(OPTLEVEL) \
+	-fpack-struct -fshort-enums             \
+	-funsigned-bitfields -funsigned-char    \
+	-Wall 
+
+# Flags pour le compilateur en C++
+CXXFLAGS=-fno-exceptions     
+
+# Linker pour lier les librairies utilisees
+LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)  
 
 
 ####### Cible (Target) #######
 SRC = $(wildcard $(SRC_dir)/*.cpp)
 OBJ = $(subst $(SRC_dir),$(BUILD_dir),$(SRC:.cpp=.o))
-
+LIBS = -L $(LIB_dir) -l $(LIB_name)
+INC = $(LIB_inc)
 
 
 ####### Commandes du Makefile ####### 
@@ -37,10 +52,11 @@ compileLib: makefile
 	cd $(LIB_dir); make
 
 $(TRG): $(OBJ)
-	$(CC) -o $@ $(OBJ) -L $(LIB_dir) -l $(LIB_name)
+	$(CC) $(LDFLAGS) -o $(TRG) $(OBJ) \
+	-lm $(LIBS)
 
 $(BUILD_dir)/%.o: $(SRC_dir)/%.cpp
-	$(CC) -c $< -o $@ $(CFLAGS) 
+	$(CC) -o $@ $(CFLAGS) $(CXXFLAGS) -c $<
 
 
 
@@ -49,12 +65,14 @@ vars:
 	@echo "SRC = $(SRC)"
 	@echo "OBJ = $(OBJ)"
 	@echo "TRG = $(TRG)"
+	@echo "LIBS = $(LIBS)"
+	@echo "INC = $(INC)"
 
 
 
 # Nettoyer les dossiers
 clean: cleanLib
-	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG)
+	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d
 	
 cleanLib: makefile
 	cd $(LIB_dir); make clean
@@ -64,7 +82,7 @@ cleanLib: makefile
 # installer l'executable sur le robot
 install: $(HEXROMTRG)				
 	avrdude -c usbasp   \
-	-p atmega324pa -P -e -U flash:w:$(HEXROMTRG)
+	-p $(MCU) -P -e -U flash:w:$(HEXROMTRG)
 
 %.hex: %.out
 	avr-objcopy -j .text -j .data \

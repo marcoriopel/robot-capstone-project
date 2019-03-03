@@ -3,7 +3,7 @@
 
 int main()
 {
-    allumerDEL(AMBRE); 
+    allumerDEL(VERT); 
 
     return 0;
 }
