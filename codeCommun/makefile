@@ -78,7 +78,7 @@ vars:
 
 # Nettoyer les dossiers
 clean: cleanLib
-	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d
+	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d $(TRG).map
 	
 cleanLib: makefile
 	cd $(LIB_dir); make clean
