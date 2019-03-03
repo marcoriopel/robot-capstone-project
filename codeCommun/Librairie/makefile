@@ -8,11 +8,19 @@ TRG = libanane.a
 
 CC = avr-gcc
 AR = avr-ar
-
+# Nom du microcontroleur cible
+MCU=atmega324pa
+# Niveau d'optimization
+OPTLEVEL=s
 
 
 ####### flags #######
-CFLAGS = -mmcu=atmega324pa -Wall
+# Flags pour le compilateur en C
+CFLAGS = -g -mmcu=$(MCU) -O$(OPTLEVEL) \
+	-fpack-struct -fshort-enums             \
+	-funsigned-bitfields -funsigned-char    \
+	-Wall 
+
 LIBFLAGS = -csr
 
 

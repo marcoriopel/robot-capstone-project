@@ -2,11 +2,17 @@
 
 
 ####### variables #######
+#repertoire contenant le code source
 SRC_dir = tests/sources
+#repertoire contenant les fichiers binaires
 BUILD_dir = tests/build
+#nom du projet
 PROJECTNAME = test
+#repertoire contenant les fichiers de la lib a inclure
 LIB_inc = ./Librairie/sources
+#repertoire contenant la librairie a inclure
 LIB_dir = ./Librairie
+#nom de la librairie
 LIB_name = anane 
 
 #Nom du compilateur
@@ -31,7 +37,7 @@ CFLAGS = -I $(INC) -g -mmcu=$(MCU) -O$(OPTLEVEL) \
 # Flags pour le compilateur en C++
 CXXFLAGS=-fno-exceptions     
 
-# Linker pour lier les librairies utilisees
+# Flags du Linker pour lier les librairies utilisees
 LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)  
 
 
