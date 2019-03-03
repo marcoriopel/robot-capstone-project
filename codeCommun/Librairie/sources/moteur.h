@@ -24,7 +24,7 @@
 *    Ajustement du signal PWM pour chacune des roues 
 *    du robot en fonction d'un pourcentage respectif
 */
-void ajustementPWM ( uint8_t pourcentageOCR1A, uint8_t pourcentageOCR1B ); 
+void ajustementPWM ( uint8_t pourcentageRoueA, uint8_t pourcentageRoueB ); 
 
 
 
