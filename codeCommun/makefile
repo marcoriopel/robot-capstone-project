@@ -86,7 +86,7 @@ cleanLib: makefile
 
 
 # installer l'executable sur le robot
-install: $(HEXROMTRG)				
+install: compileLib $(HEXROMTRG)				
 	avrdude -c usbasp   \
 	-p $(MCU) -P -e -U flash:w:$(HEXROMTRG)
 
