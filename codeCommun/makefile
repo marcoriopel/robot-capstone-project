@@ -29,7 +29,7 @@ HEXTRG=$(HEXROMTRG) $(PROJECTNAME).ee.hex
 
 ####### flags #######
 # Flags pour le compilateur en C
-CFLAGS = -I $(INC) -g -mmcu=$(MCU) -O$(OPTLEVEL) \
+CFLAGS = -I. -MMD $(INC) -g -mmcu=$(MCU) -O$(OPTLEVEL) \
 	-fpack-struct -fshort-enums             \
 	-funsigned-bitfields -funsigned-char    \
 	-Wall 
@@ -45,7 +45,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 SRC = $(wildcard $(SRC_dir)/*.cpp)
 OBJ = $(subst $(SRC_dir),$(BUILD_dir),$(SRC:.cpp=.o))
 LIBS = -L $(LIB_dir) -l $(LIB_name)
-INC = $(LIB_inc)
+INC = -I $(LIB_inc)
 
 
 ####### Commandes du Makefile ####### 
