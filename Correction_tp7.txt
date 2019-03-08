@@ -1,0 +1,113 @@
+Polytechnique Montréal
+
+Département de génie informatique et génie logiciel
+
+INF1900: Projet initial de système embarqué
+
+Grille de correction des programmes:
+
+Identification:
+  Travail    : Mise en commun du code et formation de librairies
+  Section #  : 1
+  Équipe #   : 0222
+  Correcteur : Anes Belfodil
+
+Code:
+– La qualités et le choix de vos portions de code choisies   (5/5)
+– La qualités de vos modifications aux Makefiles             (5/5)
+
+Le rapport:
+– Explications cohérentes par rapport au code retenu
+  pour former la librairie                                   (2/2)
+– Explications cohérentes par rapport aux Makefiles modifiés (2/2)
+– Explications claires avec un bon niveau de détails         (2/2)
+– Bon français                                               (1/1)
+
+Généralités:
+– Bonne soumission de l'ensemble du code (compilation sans
+  erreurs, …) et du rapport selon le format demandé          (2/3)
+
+Total: 19/20
+
+Commentaires du correcteur:
+- Ne compile pas si le dossier "build" n'existe pas (-1)
+
+
+======================= Basé sur le commit suivant =============================
+commit b311133cacd8af65acc8f4436ec5c77e97594525
+Author: Marco <marco.riopel@hotmail.com>
+Date:   Sun Mar 3 14:01:56 2019 -0500
+
+    J'ai ajoute le rapport sur les makefiles
+
+======================= Fichiers indésirables =============================
+branche-02/tp/tp2/pb1/makefile~
+branche-02/tp/tp2/pb2/makefile~
+branche-02/tp/tp3/pb2/tp3probleme1.out
+branche-02/tp/tp3/pb2/tp3probleme1.out.map
+branche-02/tp/tp3/pb2/tp3probleme2.d
+branche-02/tp/tp3/pb2/tp3probleme2.o
+branche-02/tp/tp4/pb1/probleme1.d
+branche-02/tp/tp4/pb1/probleme1.o
+branche-02/tp/tp4/pb1/tp3probleme1.hex
+branche-02/tp/tp4/pb1/tp3probleme1.out
+branche-02/tp/tp4/pb1/tp3probleme1.out.map
+branche-02/tp/tp4/pb2/probleme2.d
+branche-02/tp/tp4/pb2/probleme2.o
+branche-02/tp/tp4/pb2/tp3probleme1.hex
+branche-02/tp/tp4/pb2/tp3probleme1.out
+branche-02/tp/tp4/pb2/tp3probleme1.out.map
+branche-02/tp/tp4/pb3/probleme3.d
+branche-02/tp/tp4/pb3/probleme3.o
+branche-02/tp/tp4/pb3/tp3probleme1.hex
+branche-02/tp/tp4/pb3/tp3probleme1.out
+branche-02/tp/tp4/pb3/tp3probleme1.out.map
+branche-02/tp/tp5/pb1/memoire_24.d
+branche-02/tp/tp5/pb1/memoire_24.o
+branche-02/tp/tp5/pb1/probleme1.d
+branche-02/tp/tp5/pb1/probleme1.o
+branche-02/tp/tp5/pb1/tp3probleme1.out.map
+branche-02/tp/tp5/pb1/tp5probleme1.hex
+branche-02/tp/tp5/pb1/tp5probleme1.out
+branche-02/tp/tp5/pb1/tp5probleme1.out.map
+branche-02/tp/tp5/pb2/probleme2.d
+branche-02/tp/tp5/pb2/probleme2.o
+branche-02/tp/tp5/pb2/serieViaUSB/serieViaUSB.o
+branche-02/tp/tp5/pb2/tp5probleme1.hex
+branche-02/tp/tp5/pb2/tp5probleme1.out
+branche-02/tp/tp5/pb2/tp5probleme1.out.map
+branche-02/tp/tp5/pb3/memoire_24.d
+branche-02/tp/tp5/pb3/memoire_24.o
+branche-02/tp/tp5/pb3/probleme3.d
+branche-02/tp/tp5/pb3/probleme3.o
+branche-02/tp/tp5/pb3/serieViaUSB/serieViaUSB.o
+branche-02/tp/tp5/pb3/tp5probleme1.hex
+branche-02/tp/tp5/pb3/tp5probleme1.out
+branche-02/tp/tp5/pb3/tp5probleme1.out.map
+branche-02/tp/tp6/pb1/probleme1.d
+branche-02/tp/tp6/pb1/probleme1.o
+branche-02/tp/tp6/pb1/probleme11.d
+branche-02/tp/tp6/pb1/probleme11.o
+branche-02/tp/tp6/pb1/tp3probleme1.hex
+branche-02/tp/tp6/pb1/tp3probleme1.out
+branche-02/tp/tp6/pb1/tp3probleme1.out.map
+branche-02/tp/tp6/pb2/can.d
+branche-02/tp/tp6/pb2/can.o
+branche-02/tp/tp6/pb2/probleme2.d
+branche-02/tp/tp6/pb2/probleme2.o
+branche-02/tp/tp6/pb2/tp6.hex
+branche-02/tp/tp6/pb2/tp6.out
+branche-02/tp/tp6/pb2/tp6.out.map
+branche-22/tp/tp5/pb2/serieViaUSB/serieViaUSB.o
+branche-22/tp/tp5/pb3/serieViaUSB/serieViaUSB.o
+
+======================= Sortie de make dans les sous-répertoires =============================
+======================= Sortie de make dans projet_dir/exec_dir =============================
+cd ./Librairie; make
+make[1]: Entering directory '/home/anes/Documents/School/correction_tp7/0222/codeCommun/Librairie'
+avr-gcc -g -mmcu=atmega324pa -Os -fpack-struct -fshort-enums -funsigned-bitfields -funsigned-char -Wall  -fno-exceptions  -c sources/can.cpp -o build/can.o 
+Assembler messages:
+Fatal error: can't create build/can.o: No such file or directory
+make[1]: *** [makefile:49: build/can.o] Error 1
+make[1]: Leaving directory '/home/anes/Documents/School/correction_tp7/0222/codeCommun/Librairie'
+make: *** [makefile:58: compileLib] Error 2
