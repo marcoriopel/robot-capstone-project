@@ -5,7 +5,7 @@
 #repertoire contenant le code source
 SRC_dir = Projet
 #repertoire contenant les fichiers binaires
-BUILD_dir = tests/build
+BUILD_dir = Projet
 #nom du projet
 PROJECTNAME = TP9
 #repertoire contenant les fichiers de la lib a inclure
