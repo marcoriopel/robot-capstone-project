@@ -34,10 +34,10 @@ int main()
                 case '\x02': //attendre (att)
                     break;
 
-                case '\x84': //allumer la DEL (dal)
+                case '\x84': allumerDEL(VERT) //allumer la DEL (dal)
                     break;
 
-                case '\x85': //eteindre la DEL (det)
+                case '\x85': allumerDEL(ETEINT) //eteindre la DEL (det)
                     break;
 
                 case '\x88': //jouer la sonorite (sgo)
