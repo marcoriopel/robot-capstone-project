@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <memoire.h>
 #include <memoire_24.h>
 #include <minuterie.h>
@@ -7,8 +8,8 @@
 
 
 
-char instruction; //Variable pour entreposer 
-char operande;
+uint8_t* instruction; //Variable pour entreposer 
+uint8_t* operande;
 uint16_t adresse = 0x02;
 
 int main()
@@ -16,19 +17,19 @@ int main()
     Memoire24CXXX memoire;
     bool progEstCommence = false;
 
-    while(instruction != '\xFF')
+    while(*instruction != '\xFF')
     {
         memoire.lecture(adresse++, instruction);
         memoire.lecture(adresse++, operande);
 
-        if (instruction == '\x01') //Debut
+        if (*instruction == '\x01') //Debut
         {
             progEstCommence = true;
         }
         
         while (progEstCommence) //Fin
         {
-            switch (instruction)
+            switch (*instruction)
             {
                 case '\x02': //attendre (att)
                     break;
