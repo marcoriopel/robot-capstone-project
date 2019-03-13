@@ -3,11 +3,11 @@
 
 ####### variables #######
 #repertoire contenant le code source
-SRC_dir = Projet/sources
+SRC_dir = tests/sources
 #repertoire contenant les fichiers binaires
-BUILD_dir = Projet/build
+BUILD_dir = tests/build
 #nom du projet
-PROJECTNAME = TP9
+PROJECTNAME = test
 #repertoire contenant les fichiers de la lib a inclure
 LIB_inc = ./Librairie/sources
 #repertoire contenant la librairie a inclure
