@@ -23,7 +23,6 @@ void initialisationUART(void)
     //UCSR0C &= ~((1 << UPM01) | (1 << UPM00) | (1 << USBS0));
 }
 
-// Du PC vers le USART
 uint8_t receptionUART(void)
 {
     /* Wait for data to be received */
@@ -32,7 +31,6 @@ uint8_t receptionUART(void)
     return UDR0;
 }
 
-// De l'USART vers le PC
 void transmissionUART(uint8_t donnee)
 {
     /* Wait for empty transmit buffer */
