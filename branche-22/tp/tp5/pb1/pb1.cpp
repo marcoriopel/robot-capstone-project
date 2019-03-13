@@ -22,8 +22,8 @@ int main()
     uint8_t donneeEcriture[LONGUEUR] = "*P*O*L*Y*T*E*C*H*N*I*Q*U*E* *M*O*N*T*R*E*A*L*";
     uint8_t donneeLecture[LONGUEUR];
 
-    DDRA = SORTIE;
-    PORTA = LUMIERE_ETEINTE;
+    DDRB = SORTIE;
+    PORTB = LUMIERE_ETEINTE;
 
     Memoire24CXXX memoire;
     memoire.ecriture(ADRESSE, donneeEcriture, LONGUEUR);
@@ -44,11 +44,11 @@ int main()
 
     if (estdifferent)
     {
-        PORTA = LUMIERE_ROUGE;
+        PORTB = LUMIERE_ROUGE;
     }
     else
     {
-        PORTA = LUMIERE_VERTE;
+        PORTB = LUMIERE_VERTE;
     }
     
 

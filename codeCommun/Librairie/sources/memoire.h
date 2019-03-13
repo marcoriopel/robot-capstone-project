@@ -23,4 +23,6 @@
 *    chaque bit de la memoire est mis au caractere de
 *    terminaison de chaine "\0"
 */
-void effacerMemoire()
+void effacerMemoire(Memoire24CXXX memoire);
+
+void afficherMemoire(Memoire24CXXX memoire, int nOctets);

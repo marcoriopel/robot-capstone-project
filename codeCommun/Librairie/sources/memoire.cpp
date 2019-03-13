@@ -5,15 +5,28 @@
  * Version: 1.1
  */
 
+#pragma once
+
+#include <util/delay.h>
 #include "memoire_24.h"
+#include "UART.h"
 
-void effacerMemoire()
+void effacerMemoire(Memoire24CXXX memoire)
 {
-    Memoire24CXXX memoire;
+    
+    memoire.ecriture(0x00, 0xFF);
+    _delay_ms(5);
 
-    const int TAILLE_MEMOIRE = 5242888; //taille de la memoire en bits
-    for (int i = 0; i < TAILLE_MEMOIRE; i++)
+}
+
+void afficherMemoire(Memoire24CXXX memoire, int nOctets)
+{
+    uint16_t adresse = 0x00;
+    uint8_t* tamponLecture;
+
+    for (int i = 0; i < nOctets; ++i)
     {
-        memoire.ecriture(i, '\0');
+        memoire.lecture(adresse++, tamponLecture);
+        transmissionUART(*tamponLecture);
     }
 }
