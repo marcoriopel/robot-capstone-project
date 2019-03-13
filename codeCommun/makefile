@@ -16,7 +16,7 @@ LIB_dir = ./Librairie
 LIB_name = anane 
 
 #Nom du compilateur
-CC = avr-gcc
+CC = avr-g++
 # Nom du microcontroleur cible
 MCU=atmega324pa
 # Niveau d'optimization

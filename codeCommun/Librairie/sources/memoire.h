@@ -23,4 +23,6 @@
 *    chaque bit de la memoire est mis au caractere de
 *    terminaison de chaine "\0"
 */
-void effacerMemoire()
+#pragma once
+
+void effacerMemoire();

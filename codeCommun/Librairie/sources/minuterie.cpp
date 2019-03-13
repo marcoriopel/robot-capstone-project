@@ -5,7 +5,7 @@
  * Version: 1.1
  */
 
-#pragma once
+//#pragma once
 
 #define F_CPU 8000000UL
 #include <avr/io.h>
