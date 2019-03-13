@@ -3,19 +3,19 @@
 
 ####### variables #######
 #repertoire contenant le code source
-SRC_dir = Projet/opcodes
+SRC_dir = sources
 #repertoire contenant les fichiers binaires
-BUILD_dir = Projet/build
-#repertoire contenant le makefile de test
-TEST_dir = tests
+BUILD_dir = build
 #nom du projet
 PROJECTNAME = test
 #repertoire contenant les fichiers de la lib a inclure
-LIB_inc = ./Librairie/sources
+LIB_inc = ../Librairie/sources
 #repertoire contenant la librairie a inclure
-LIB_dir = ./Librairie
+LIB_dir = ../Librairie
 #nom de la librairie
 LIB_name = anane 
+#nom de la librairie
+TEST_SRC = afficherMem
 
 #Nom du compilateur
 CC = avr-g++
@@ -44,7 +44,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 
 
 ####### Cible (Target) #######
-SRC = $(wildcard $(SRC_dir)/*.cpp)
+SRC = $(SRC_dir)/$(TEST_SRC).cpp
 OBJ = $(subst $(SRC_dir),$(BUILD_dir),$(SRC:.cpp=.o))
 LIBS = -L $(LIB_dir) -l $(LIB_name)
 INC = -I $(LIB_inc)
@@ -53,11 +53,7 @@ INC = -I $(LIB_inc)
 ####### Commandes du Makefile ####### 
 
 # Compiler le projet
-all: compileLib $(TRG)
-
-# Compiler la librairie au besoin
-compileLib: makefile
-	cd $(LIB_dir); make
+all: $(TRG)
 
 $(TRG): $(OBJ)
 	$(CC) $(LDFLAGS) -o $(TRG) $(OBJ) \
@@ -77,25 +73,13 @@ vars:
 	@echo "INC = $(INC)"
 
 
-# Installer le test sur le robot
-test: compileLib makefile
-	cd $(TEST_dir); make install
-
 
 # Nettoyer les dossiers
-clean: cleanLib cleanTest
-	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d $(TRG).map $(TRG).out.map $(TRG).hex
-	
-cleanLib: makefile
-	cd $(LIB_dir); make clean
-
-cleanTest: makefile
-	cd $(TEST_dir); make clean
-
-
+clean: 
+	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) $(BUILD_dir)/*.d $(TRG).map $(TRG).out.map $(TRG).hex
 
 # installer l'executable sur le robot
-install: compileLib $(HEXROMTRG)				
+install: $(HEXROMTRG)				
 	avrdude -c usbasp   \
 	-p $(MCU) -P -e -U flash:w:$(HEXROMTRG)
 
