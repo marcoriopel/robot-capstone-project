@@ -1,5 +1,0 @@
-1- On a change PRJSRC= $(wildcard *.cpp) pour PRJSRC= $(wildcard /sources*.cpp)
-   pour acceder aux fichiers .cpp qui sont dans le dossier sources. Le dossier source
-   contient tous fichiers .cpp et .h que nous utilisons dans notre librairie. 
-
-2- On a change CC=avr-ar crs pour CC=avr-gcc. pour produire le fichier .a
