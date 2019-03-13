@@ -11,16 +11,19 @@
 #include "memoire_24.h"
 #include "UART.h"
 
-void effacerMemoire(Memoire24CXXX memoire)
+void effacerMemoire()
 {
-    
+    Memoire24CXXX memoire;
+
     memoire.ecriture(0x00, 0xFF);
     _delay_ms(5);
 
 }
 
-void afficherMemoire(Memoire24CXXX memoire, int nOctets)
+void afficherMemoire(int nOctets)
 {
+    Memoire24CXXX memoire;
+
     uint16_t adresse = 0x00;
     uint8_t* tamponLecture;
 

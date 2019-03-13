@@ -28,10 +28,10 @@
 *    le premier charactere de la memoire est mis au caractere de
 *    fin "0xFF"
 */
-void effacerMemoire(Memoire24CXXX memoire);
+void effacerMemoire();
 
 /*
 *    fonction qui affiche les nOctets premiers octets de la memoire 
 */
-void afficherMemoire(Memoire24CXXX memoire, int nOctets);
+void afficherMemoire(int nOctets);
 

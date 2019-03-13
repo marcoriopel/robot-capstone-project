@@ -35,8 +35,6 @@ int main()
         memoire.ecriture(adresse++, tamponEcriture);
         _delay_ms(5);
     }
-
-    afficherMemoire(memoire, nOctets);
     
 
     return 0;
