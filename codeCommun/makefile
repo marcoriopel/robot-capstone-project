@@ -3,7 +3,7 @@
 
 ####### variables #######
 #repertoire contenant le code source
-SRC_dir = tests/sources
+SRC_dir = Projet
 #repertoire contenant les fichiers binaires
 BUILD_dir = tests/build
 #nom du projet
