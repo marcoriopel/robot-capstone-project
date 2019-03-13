@@ -25,6 +25,8 @@
 */
 #pragma once
 
+#include "memoire_24.h"
+
 void effacerMemoire(Memoire24CXXX memoire);
 
 void afficherMemoire(Memoire24CXXX memoire, int nOctets);

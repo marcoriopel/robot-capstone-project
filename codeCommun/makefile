@@ -3,7 +3,7 @@
 
 ####### variables #######
 #repertoire contenant le code source
-SRC_dir = Projet/opcodes
+SRC_dir = Projet/sources
 #repertoire contenant les fichiers binaires
 BUILD_dir = tests/build
 #nom du projet
@@ -78,7 +78,7 @@ vars:
 
 # Nettoyer les dossiers
 clean: cleanLib
-	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d $(TRG).map
+	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d $(TRG).map $(TRG).out.map $(TRG).hex
 	
 cleanLib: makefile
 	cd $(LIB_dir); make clean

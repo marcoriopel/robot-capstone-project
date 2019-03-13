@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <stdint.h>
-#include "memoire.h"
 #include "memoire_24.h"
+#include "memoire.h"
 #include "minuterie.h"
 #include "moteur.h"
 #include "DEL.h"
