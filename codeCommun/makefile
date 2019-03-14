@@ -16,6 +16,8 @@ LIB_inc = ./Librairie/sources
 LIB_dir = ./Librairie
 #nom de la librairie
 LIB_name = anane 
+#repertoire contenant le makefile du test
+TEST_dir = tests
 
 #Nom du compilateur
 CC = avr-g++
@@ -44,7 +46,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 
 
 ####### Cible (Target) #######
-SRC = $(wildcard $(SRC_dir)/*.cpp)
+SRC = $(wildcard $(SRC_dir)/.cpp)
 OBJ = $(subst $(SRC_dir),$(BUILD_dir),$(SRC:.cpp=.o))
 LIBS = -L $(LIB_dir) -l $(LIB_name)
 INC = -I $(LIB_inc)
