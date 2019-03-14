@@ -13,7 +13,7 @@ void initialisationUART(void)
 
     // permettre la reception et la transmission par le UART0
 
-    UCSR0A = 0;
+    UCSR0A |= 0;
 
     UCSR0B |= (1 << RXEN0) | (1 << TXEN0);
 

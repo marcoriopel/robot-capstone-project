@@ -46,7 +46,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 
 
 ####### Cible (Target) #######
-SRC = $(wildcard $(SRC_dir)/.cpp)
+SRC = $(wildcard $(SRC_dir)/*.cpp)
 OBJ = $(subst $(SRC_dir),$(BUILD_dir),$(SRC:.cpp=.o))
 LIBS = -L $(LIB_dir) -l $(LIB_name)
 INC = -I $(LIB_inc)

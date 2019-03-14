@@ -10,10 +10,6 @@
 #include <util/delay.h>
 
 
-
-
-
-
 int main()
 {
     initialisationUART();
@@ -21,16 +17,14 @@ int main()
 
     Memoire24CXXX memoire;
     uint16_t adresse = 0x00;
+    transmissionUART(adresse);
+
 
     uint8_t* size0;
     memoire.lecture(adresse++, size0);
-    transmissionUART(*size0);
     uint8_t* size1;
     memoire.lecture(adresse++, size1);
-    transmissionUART(*size1);
-   
     uint16_t size = (*size0 << 8) | *size1;
-    transmissionUART(size);
 
     bool progEstCommence = false;
 
@@ -43,9 +37,6 @@ int main()
 
         memoire.lecture(adresse++, instruction);
         memoire.lecture(adresse++, operande);
-        transmissionUART(*instruction);
-        transmissionUART(*operande);
-
 
         if (*instruction == '\x01') //Debut
         {
@@ -55,10 +46,7 @@ int main()
         while (progEstCommence) //Fin
         {
             memoire.lecture(adresse++, instruction);
-            memoire.lecture(adresse++, operande);
-            transmissionUART(*instruction);
-            transmissionUART(*operande);
-            
+            memoire.lecture(adresse++, operande);            
 
             switch (*instruction)
             {
