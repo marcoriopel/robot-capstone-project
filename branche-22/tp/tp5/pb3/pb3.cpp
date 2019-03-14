@@ -57,7 +57,7 @@ int main()
         transmissionUART(*tamponLecture);
     }*/
 
-    for (int i = 0; i < 102; ++i)
+    for (int i = 0; i < 48; ++i)
     {
         memoire.lecture(adresse++, tamponLecture);
         transmissionUART(*tamponLecture);

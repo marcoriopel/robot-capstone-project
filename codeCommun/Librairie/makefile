@@ -7,7 +7,7 @@ BUILD_dir = build
 TRG = libanane.a
 
 # Nom du compilateur
-CC = avr-g++
+CC = avr-gcc
 # Nom de l'archiveur
 AR = avr-ar
 # Nom du microcontroleur cible

@@ -3,7 +3,7 @@
 
 ####### variables #######
 #repertoire contenant le code source
-SRC_dir = Projet/opcodes
+SRC_dir = Projet/sources
 #repertoire contenant les fichiers binaires
 BUILD_dir = Projet/build
 #repertoire contenant le makefile de test
@@ -46,7 +46,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 
 
 ####### Cible (Target) #######
-SRC = $(wildcard $(SRC_dir)/.cpp)
+SRC = $(wildcard $(SRC_dir)/*.cpp)
 OBJ = $(subst $(SRC_dir),$(BUILD_dir),$(SRC:.cpp=.o))
 LIBS = -L $(LIB_dir) -l $(LIB_name)
 INC = -I $(LIB_inc)

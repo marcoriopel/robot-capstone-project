@@ -20,7 +20,7 @@ void initialisationUART(void)
     // Format des trames: 8 bits, 1 stop bits, none parity
 
     UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);
-    //UCSR0C &= ~((1 << UPM01) | (1 << UPM00) | (1 << USBS0));
+    UCSR0C &= ~((1 << UPM01) | (1 << UPM00) | (1 << USBS0));
 }
 
 uint8_t receptionUART(void)
