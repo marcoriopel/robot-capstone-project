@@ -14,39 +14,44 @@ int main()
 {
     initialisationUART();
 
-
     Memoire24CXXX memoire;
     uint16_t adresse = 0x00;
-    transmissionUART(adresse);
-
 
     uint8_t* size0;
     memoire.lecture(adresse++, size0);
+    transmissionUART(*size0);
     uint8_t* size1;
     memoire.lecture(adresse++, size1);
+    transmissionUART(*size1);
     uint16_t size = (*size0 << 8) | *size1;
 
     bool progEstCommence = false;
 
     uint8_t* instruction; //Variable pour entreposer 
+    uint8_t* operande;
 
-    while(*instruction != '\xFF')
-    {
-        
-        uint8_t* operande;
+   for (int i = 0; i < (size - 2)/2; ++i)
+   {
+       memoire.lecture(adresse++, instruction);
+       transmissionUART(*instruction);
+       memoire.lecture(adresse++, operande);
+       transmissionUART(*operande);
+   }
 
-        memoire.lecture(adresse++, instruction);
-        memoire.lecture(adresse++, operande);
-
-        if (*instruction == '\x01') //Debut
+    /*while(*instruction != 0xff)
+    {  
+        if (*instruction == 0x01) //Debut
         {
             progEstCommence = true;
+            allumerDEL(VERT);
         }
         
         while (progEstCommence) //Fin
         {
             memoire.lecture(adresse++, instruction);
-            memoire.lecture(adresse++, operande);            
+            //transmissionUART(*instruction);
+            memoire.lecture(adresse++, operande);
+            //transmissionUART(*operande);
 
             switch (*instruction)
             {
@@ -54,7 +59,7 @@ int main()
                 case '\x02': //attendre (att)
                     break;
 
-                case '\x44': allumerDEL(VERT); //allumer la DEL (dal)
+                case 0x44: allumerDEL(VERT); //allumer la DEL (dal)
                     break;
 
                 case '\x45': //allumerDEL(ETEINT); //eteindre la DEL (det)
@@ -98,5 +103,12 @@ int main()
             }
             
         }
-    }
+
+        memoire.lecture(adresse++, instruction);
+        //transmissionUART(*instruction);
+        memoire.lecture(adresse++, operande);
+        //transmissionUART(*instruction);
+    }*/
+
+    return 0;
 }
