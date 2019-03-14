@@ -22,12 +22,11 @@ void effacerMemoire()
 
 void afficherMemoire(int nOctets)
 {
-    Memoire24CXXX memoire;
-
-    uint16_t adresse = 0x00;
     uint8_t* tamponLecture;
-
-    for (int i = 0; i < nOctets; ++i)
+    Memoire24CXXX memoire;
+    uint16_t adresse = 0x00;
+    
+    for (int i = 0; i < 102; ++i)
     {
         memoire.lecture(adresse++, tamponLecture);
         transmissionUART(*tamponLecture);

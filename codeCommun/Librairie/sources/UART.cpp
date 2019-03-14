@@ -13,14 +13,14 @@ void initialisationUART(void)
 
     // permettre la reception et la transmission par le UART0
 
-    UCSR0A |= 0;
+    UCSR0A = 0;
 
     UCSR0B |= (1 << RXEN0) | (1 << TXEN0);
 
     // Format des trames: 8 bits, 1 stop bits, none parity
 
     UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);
-    //UCSR0C &= ~((1 << UPM01) | (1 << UPM00) | (1 << USBS0));
+    UCSR0C &= ~((1 << UPM01) | (1 << UPM00) | (1 << USBS0));
 }
 
 uint8_t receptionUART(void)
