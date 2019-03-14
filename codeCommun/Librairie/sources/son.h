@@ -23,4 +23,6 @@
 /*
 *   allume le moteur selon le poucentage, la frequence et la duree delimite par l'usager
 */
-void allumerSon(int intensitePourcentage, int frequence, double duree);
+void allumerSon(int position);
+
+void arreterSon();
