@@ -8,7 +8,7 @@
 #include "can.h"
 #include "UART.h"
 #include <util/delay.h>
-
+#include "son.h"
 
 int main()
 {
@@ -71,9 +71,11 @@ int main()
                     break;
 
                 case '\x48': //jouer la sonorite (sgo)
+                        allumerSon(*operande);
                     break;
 
                 case '\x09': //arreter de jouer la sonorite (sar)
+                        arreterSon();
                     break;
 
                 case '\x60': //arreter les moteurs (mar)
