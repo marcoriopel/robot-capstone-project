@@ -15,7 +15,7 @@ LIB_dir = ../Librairie
 #nom de la librairie
 LIB_name = anane 
 #nom de la librairie
-TEST_SRC = afficherMem
+TEST_SRC = test_son
 
 #Nom du compilateur
 CC = avr-g++
