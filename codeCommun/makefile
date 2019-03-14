@@ -3,7 +3,7 @@
 
 ####### variables #######
 #repertoire contenant le code source
-SRC_dir = Projet/opcodes
+SRC_dir = Projet/sources
 #repertoire contenant les fichiers binaires
 BUILD_dir = Projet/build
 #repertoire contenant le makefile de test

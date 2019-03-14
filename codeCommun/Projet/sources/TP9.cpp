@@ -6,23 +6,46 @@
 #include "moteur.h"
 #include "DEL.h"
 #include "can.h"
+#include "UART.h"
+#include <util/delay.h>
 
 
 
 
-uint8_t* instruction; //Variable pour entreposer 
-uint8_t* operande;
-uint16_t adresse = 0x02;
+
 
 int main()
 {
+    initialisationUART();
+
+
     Memoire24CXXX memoire;
+    uint16_t adresse = 0x00;
+
+    uint8_t* size0;
+    memoire.lecture(adresse++, size0);
+    transmissionUART(*size0);
+    uint8_t* size1;
+    memoire.lecture(adresse++, size1);
+    transmissionUART(*size1);
+   
+    uint16_t size = (*size0 << 8) | *size1;
+    transmissionUART(size);
+
     bool progEstCommence = false;
+
+    uint8_t* instruction; //Variable pour entreposer 
 
     while(*instruction != '\xFF')
     {
+        
+        uint8_t* operande;
+
         memoire.lecture(adresse++, instruction);
         memoire.lecture(adresse++, operande);
+        transmissionUART(*instruction);
+        transmissionUART(*operande);
+
 
         if (*instruction == '\x01') //Debut
         {
@@ -31,18 +54,25 @@ int main()
         
         while (progEstCommence) //Fin
         {
+            memoire.lecture(adresse++, instruction);
+            memoire.lecture(adresse++, operande);
+            transmissionUART(*instruction);
+            transmissionUART(*operande);
+            
+
             switch (*instruction)
             {
+                
                 case '\x02': //attendre (att)
                     break;
 
-                case '\x84': allumerDEL(VERT); //allumer la DEL (dal)
+                case '\x44': allumerDEL(VERT); //allumer la DEL (dal)
                     break;
 
-                case '\x85': allumerDEL(ETEINT); //eteindre la DEL (det)
+                case '\x45': //allumerDEL(ETEINT); //eteindre la DEL (det)
                     break;
 
-                case '\x88': //jouer la sonorite (sgo)
+                case '\x48': //jouer la sonorite (sgo)
                     break;
 
                 case '\x09': //arreter de jouer la sonorite (sar)
@@ -71,8 +101,14 @@ int main()
 
                 case '\xC1': //fin de boucle (fbc)
                     break;
-                
+
+                case '\xFF': progEstCommence = false; //pour sortir du while si on se trouve a l'instruction de fin
+                    break;
+
+                default: allumerDEL(ROUGE);
+                    break;
             }
+            
         }
     }
 }
