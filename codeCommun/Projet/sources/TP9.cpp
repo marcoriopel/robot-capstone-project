@@ -32,6 +32,10 @@ int main()
 
    for (int i = 0; i < (size - 2)/2; ++i)
    {
+       bool estDansBoucle = false;
+       int nIterations = 0;
+       utint8_t adresseBoucle;
+
        memoire.lecture(adresse++, instruction);
        transmissionUART(*instruction);
        memoire.lecture(adresse++, operande);
@@ -46,13 +50,16 @@ int main()
             switch (*instruction)
             {
                 
-                case '\x02': //attendre (att)
+                case 0x02: for (int i = 0; i < *operande; ++i)   //attendre (att)
+                           {  
+                                _delay_ms(25);
+                           } 
                     break;
 
                 case 0x44: allumerDEL(VERT); //allumer la DEL (dal)
                     break;
 
-                case '\x45': //allumerDEL(ETEINT); //eteindre la DEL (det)
+                case 0x45: allumerDEL(ETEINT); //eteindre la DEL (det)
                     break;
 
                 case '\x48': //jouer la sonorite (sgo)
@@ -79,76 +86,15 @@ int main()
                 case '\x65': //tourner a gauche (trg)
                     break;
 
-                case '\xC0': //debut de boucle (dbc)
+                case 0xC0: nIterations = *operande; //debut de boucle (dbc)
+                           adresseBoucle = adresse;
                     break;
 
-                case '\xC1': //fin de boucle (fbc)
-                    break;
-
-                case '\xFF': progEstCommence = false; //pour sortir du while si on se trouve a l'instruction de fin
-                    break;
-
-                default: //allumerDEL(ROUGE);
-                    break;
-            }
-        }
-   }
-
-    /*while(*instruction != 0xff)
-    {  
-        if (*instruction == 0x01) //Debut
-        {
-            progEstCommence = true;
-            allumerDEL(VERT);
-        }
-        
-        while (progEstCommence) //Fin
-        {
-            memoire.lecture(adresse++, instruction);
-            //transmissionUART(*instruction);
-            memoire.lecture(adresse++, operande);
-            //transmissionUART(*operande);
-
-            switch (*instruction)
-            {
-                
-                case '\x02': //attendre (att)
-                    break;
-
-                case 0x44: allumerDEL(VERT); //allumer la DEL (dal)
-                    break;
-
-                case '\x45': //allumerDEL(ETEINT); //eteindre la DEL (det)
-                    break;
-
-                case '\x48': //jouer la sonorite (sgo)
-                    break;
-
-                case '\x09': //arreter de jouer la sonorite (sar)
-                    break;
-
-                case '\x60': //arreter les moteurs (mar)
-                    break;
-
-                case '\x61': //arreter les moteurs (mar)
-                    break;
-
-                case '\x62': //avancer (mav)
-                    break;
-
-                case '\x63': //reculer (mre)
-                    break;
-
-                case '\x64': //touner a droite (trd)
-                    break;
-
-                case '\x65': //tourner a gauche (trg)
-                    break;
-
-                case '\xC0': //debut de boucle (dbc)
-                    break;
-
-                case '\xC1': //fin de boucle (fbc)
+                case 0xC1: if (nIterations != 0) //fin de boucle (fbc)
+                           {
+                                --nIterations;
+                                adresse = adresseBoucle;
+                           }
                     break;
 
                 case '\xFF': progEstCommence = false; //pour sortir du while si on se trouve a l'instruction de fin
@@ -157,14 +103,10 @@ int main()
                 default: allumerDEL(ROUGE);
                     break;
             }
-            
         }
+   }
 
-        memoire.lecture(adresse++, instruction);
-        //transmissionUART(*instruction);
-        memoire.lecture(adresse++, operande);
-        //transmissionUART(*instruction);
-    }*/
+   
 
     return 0;
 }
