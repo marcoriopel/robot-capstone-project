@@ -7,16 +7,16 @@ int main()
     
     DDRB = 0xFF;
     PORTB = (0b00000100);
-    /*while(true)
-    {
-        PORTB ^= 0b1100;
-        _delay_ms(5);
-    }*/
 
     allumerSon(53);
     _delay_ms(1500);
-
-
-
+    allumerSon(46);
+    _delay_ms(1500);
+    allumerSon(55);
+    _delay_ms(1500);
+    allumerSon(62);
+    _delay_ms(1500);
+    allumerSon(45);
+    arreterSon();
     return 0;
 }
