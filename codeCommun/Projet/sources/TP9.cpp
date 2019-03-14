@@ -34,12 +34,14 @@ int main()
    {
        bool estDansBoucle = false;
        int nIterations = 0;
-       utint8_t adresseBoucle;
+       uint8_t adresseBoucle;
 
        memoire.lecture(adresse++, instruction);
        transmissionUART(*instruction);
        memoire.lecture(adresse++, operande);
        transmissionUART(*operande);
+
+       _delay_ms(5000);
 
        if (*instruction == 0x01) //Debut
         {
@@ -62,12 +64,10 @@ int main()
                 case 0x45: allumerDEL(ETEINT); //eteindre la DEL (det)
                     break;
 
-                case '\x48': //jouer la sonorite (sgo)
-                        allumerSon(*operande);
+                case 0x48: allumerSon(*operande); //jouer la sonorite (sgo)
                     break;
 
-                case '\x09': //arreter de jouer la sonorite (sar)
-                        arreterSon();
+                case '\x09': arreterSon(); //arreter de jouer la sonorite (sar)
                     break;
 
                 case '\x60': //arreter les moteurs (mar)
@@ -99,7 +99,8 @@ int main()
                            }
                     break;
 
-                case '\xFF': progEstCommence = false; //pour sortir du while si on se trouve a l'instruction de fin
+                case 0xFF: progEstCommence = false; //pour sortir du while si on se trouve a l'instruction de fin
+                           allumerDEL(ROUGE);
                     break;
 
                 default: allumerDEL(ROUGE);
