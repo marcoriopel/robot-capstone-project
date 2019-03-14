@@ -14,17 +14,11 @@ LIB_inc = ../Librairie/sources
 LIB_dir = ../Librairie
 #nom de la librairie
 LIB_name = anane 
-<<<<<<< HEAD
-
-#Nom du compilateur
-CC = avr-gcc
-=======
 #nom de la librairie
 TEST_SRC = afficherMem
 
 #Nom du compilateur
 CC = avr-g++
->>>>>>> aa8f3ad26255eae5b903858dbe28986af04f3df3
 # Nom du microcontroleur cible
 MCU=atmega324pa
 # Niveau d'optimization
@@ -50,11 +44,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 
 
 ####### Cible (Target) #######
-<<<<<<< HEAD
-SRC = $(SRC_dir)/test_son.cpp
-=======
 SRC = $(SRC_dir)/$(TEST_SRC).cpp
->>>>>>> aa8f3ad26255eae5b903858dbe28986af04f3df3
 OBJ = $(subst $(SRC_dir),$(BUILD_dir),$(SRC:.cpp=.o))
 LIBS = -L $(LIB_dir) -l $(LIB_name)
 INC = -I $(LIB_inc)
@@ -63,15 +53,7 @@ INC = -I $(LIB_inc)
 ####### Commandes du Makefile ####### 
 
 # Compiler le projet
-<<<<<<< HEAD
-all: compileLib $(TRG)
-
-# Compiler la librairie au besoin
-compileLib: makefile
-	cd $(LIB_dir); make
-=======
 all: $(TRG)
->>>>>>> aa8f3ad26255eae5b903858dbe28986af04f3df3
 
 $(TRG): $(OBJ)
 	$(CC) $(LDFLAGS) -o $(TRG) $(OBJ) \
@@ -93,24 +75,11 @@ vars:
 
 
 # Nettoyer les dossiers
-<<<<<<< HEAD
-clean: cleanLib
-	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d $(TRG).map
-	
-cleanLib: makefile
-	cd $(LIB_dir); make clean
-
-
-
-# installer l'executable sur le robot
-install: compileLib $(HEXROMTRG)				
-=======
 clean: 
 	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) $(BUILD_dir)/*.d $(TRG).map $(TRG).out.map $(TRG).hex
 
 # installer l'executable sur le robot
 install: $(HEXROMTRG)				
->>>>>>> aa8f3ad26255eae5b903858dbe28986af04f3df3
 	avrdude -c usbasp   \
 	-p $(MCU) -P -e -U flash:w:$(HEXROMTRG)
 
