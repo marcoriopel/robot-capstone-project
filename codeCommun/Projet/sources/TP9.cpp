@@ -52,16 +52,24 @@ int main()
             switch (*instruction)
             {
                 
+<<<<<<< HEAD
+                case 0x02: //attendre (att)
+=======
                 case 0x02: for (int i = 0; i < *operande; ++i)   //attendre (att)
                            {  
                                 _delay_ms(25);
                            } 
+>>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
                     break;
 
                 case 0x44: allumerDEL(VERT); //allumer la DEL (dal)
                     break;
 
+<<<<<<< HEAD
+                case 0x45: allumerDEL(ETEINT); //allumerDEL(ETEINT); //eteindre la DEL (det)
+=======
                 case 0x45: allumerDEL(ETEINT); //eteindre la DEL (det)
+>>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
                     break;
 
                 case 0x48: allumerSon(*operande); //jouer la sonorite (sgo)
@@ -76,10 +84,14 @@ int main()
                 case '\x61': //arreter les moteurs (mar)
                     break;
 
-                case '\x62': //avancer (mav)
+                case 0x62: //avancer (mav)
+                    ajustementDirectionRoues(true, true); //Les roues avancent
+                    ajustementPWM(*operande/255,*operande/255);
                     break;
 
                 case '\x63': //reculer (mre)
+                    ajustementDirectionRoues(false, false); //Les roues avancent
+                    ajustementPWM(*operande/255,*operande/255);
                     break;
 
                 case '\x64': //touner a droite (trd)
@@ -92,24 +104,35 @@ int main()
                            adresseBoucle = adresse;
                     break;
 
+<<<<<<< HEAD
+                case '\xC1': //fin de boucle (fbc)
+=======
                 case 0xC1: if (nIterations != 0) //fin de boucle (fbc)
                            {
                                 --nIterations;
                                 adresse = adresseBoucle;
                            }
+>>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
                     break;
 
                 case 0xFF: progEstCommence = false; //pour sortir du while si on se trouve a l'instruction de fin
                            allumerDEL(ROUGE);
                     break;
 
+<<<<<<< HEAD
+                default: //allumerDEL(ROUGE);
+=======
                 default: allumerDEL(ROUGE);
+>>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
                     break;
             }
         }
    }
 
+<<<<<<< HEAD
+=======
    
 
+>>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
     return 0;
 }
