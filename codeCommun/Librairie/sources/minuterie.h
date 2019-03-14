@@ -33,6 +33,10 @@
  *    |_____________________________________________|
  * 
  */
+
+#pragma once
+
+
 void partirMinuterie_1 ( uint8_t secondes ); 
 
 

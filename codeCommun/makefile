@@ -3,9 +3,11 @@
 
 ####### variables #######
 #repertoire contenant le code source
-SRC_dir = tests/sources
+SRC_dir = Projet/opcodes
 #repertoire contenant les fichiers binaires
-BUILD_dir = tests/build
+BUILD_dir = Projet/build
+#repertoire contenant le makefile de test
+TEST_dir = tests
 #nom du projet
 PROJECTNAME = test
 #repertoire contenant les fichiers de la lib a inclure
@@ -18,7 +20,7 @@ LIB_name = anane
 TEST_dir = tests
 
 #Nom du compilateur
-CC = avr-gcc
+CC = avr-g++
 # Nom du microcontroleur cible
 MCU=atmega324pa
 # Niveau d'optimization
@@ -77,18 +79,20 @@ vars:
 	@echo "INC = $(INC)"
 
 
-# Faire le test dans la SRC_TEST
-test : makefile
+# Installer le test sur le robot
+test: compileLib makefile
 	cd $(TEST_dir); make install
 
 
-
 # Nettoyer les dossiers
-clean: cleanLib
-	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d $(TRG).map
+clean: cleanLib cleanTest
+	rm -f $(BUILD_dir)/*.o *.out $(HEXTRG) *.d $(TRG).map $(TRG).out.map $(TRG).hex
 	
 cleanLib: makefile
 	cd $(LIB_dir); make clean
+
+cleanTest: makefile
+	cd $(TEST_dir); make clean
 
 
 

@@ -37,3 +37,8 @@ void allumerSon(int intensitePourcentage, int frequence, double duree) //Duree e
         }
     }
 }
+
+void sonPwm(uint8_t frequence)
+{
+
+}

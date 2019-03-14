@@ -51,7 +51,13 @@ int main()
     Memoire24CXXX memoire;
     uint16_t adresse = 0x00;
     
-    while (*tamponLecture != 0xFF)
+    /* while (*tamponLecture != 0xFF)
+    {
+        memoire.lecture(adresse++, tamponLecture);
+        transmissionUART(*tamponLecture);
+    }*/
+
+    for (int i = 0; i < 102; ++i)
     {
         memoire.lecture(adresse++, tamponLecture);
         transmissionUART(*tamponLecture);

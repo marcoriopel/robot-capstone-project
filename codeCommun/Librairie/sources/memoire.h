@@ -18,9 +18,20 @@
  * ####################################################
  */
 
+#pragma once
+
+#include "memoire_24.h"
+
+
 /*
-*    fonctione pour effacer le contenu de la memoire 
-*    chaque bit de la memoire est mis au caractere de
-*    terminaison de chaine "\0"
+*    fonction qui efface le contenu de la memoire 
+*    le premier charactere de la memoire est mis au caractere de
+*    fin "0xFF"
 */
-void effacerMemoire()
+void effacerMemoire();
+
+/*
+*    fonction qui affiche les nOctets premiers octets de la memoire 
+*/
+void afficherMemoire(int nOctets);
+
