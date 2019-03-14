@@ -3,19 +3,17 @@
 
 ####### variables #######
 #repertoire contenant le code source
-SRC_dir = tests/sources
+SRC_dir = sources
 #repertoire contenant les fichiers binaires
-BUILD_dir = tests/build
+BUILD_dir = build
 #nom du projet
 PROJECTNAME = test
 #repertoire contenant les fichiers de la lib a inclure
-LIB_inc = ./Librairie/sources
+LIB_inc = ../Librairie/sources
 #repertoire contenant la librairie a inclure
-LIB_dir = ./Librairie
+LIB_dir = ../Librairie
 #nom de la librairie
 LIB_name = anane 
-#repertoire contenant le makefile du test
-TEST_dir = tests
 
 #Nom du compilateur
 CC = avr-gcc
@@ -44,7 +42,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 
 
 ####### Cible (Target) #######
-SRC = $(wildcard $(SRC_dir)/.cpp)
+SRC = $(SRC_dir)/test_son.cpp
 OBJ = $(subst $(SRC_dir),$(BUILD_dir),$(SRC:.cpp=.o))
 LIBS = -L $(LIB_dir) -l $(LIB_name)
 INC = -I $(LIB_inc)
@@ -75,11 +73,6 @@ vars:
 	@echo "TRG = $(TRG)"
 	@echo "LIBS = $(LIBS)"
 	@echo "INC = $(INC)"
-
-
-# Faire le test dans la SRC_TEST
-test : makefile
-	cd $(TEST_dir); make install
 
 
 
