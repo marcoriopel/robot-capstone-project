@@ -8,7 +8,7 @@
 #include "can.h"
 #include "UART.h"
 #include <util/delay.h>
-#include "son.h"
+
 
 int main()
 {
@@ -50,32 +50,23 @@ int main()
             switch (*instruction)
             {
                 
-<<<<<<< HEAD
-                case 0x02: //attendre (att)
-=======
+
                 case 0x02: for (int i = 0; i < *operande; ++i)   //attendre (att)
                            {  
                                 _delay_ms(25);
                            } 
->>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
                     break;
 
                 case 0x44: allumerDEL(VERT); //allumer la DEL (dal)
                     break;
 
-<<<<<<< HEAD
-                case 0x45: allumerDEL(ETEINT); //allumerDEL(ETEINT); //eteindre la DEL (det)
-=======
                 case 0x45: allumerDEL(ETEINT); //eteindre la DEL (det)
->>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
                     break;
 
                 case '\x48': //jouer la sonorite (sgo)
-                        allumerSon(*operande);
                     break;
 
                 case '\x09': //arreter de jouer la sonorite (sar)
-                        arreterSon();
                     break;
 
                 case '\x60': //arreter les moteurs (mar)
@@ -104,34 +95,23 @@ int main()
                            adresseBoucle = adresse;
                     break;
 
-<<<<<<< HEAD
-                case '\xC1': //fin de boucle (fbc)
-=======
                 case 0xC1: if (nIterations != 0) //fin de boucle (fbc)
                            {
                                 --nIterations;
                                 adresse = adresseBoucle;
                            }
->>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
                     break;
 
                 case '\xFF': progEstCommence = false; //pour sortir du while si on se trouve a l'instruction de fin
                     break;
 
-<<<<<<< HEAD
-                default: //allumerDEL(ROUGE);
-=======
                 default: allumerDEL(ROUGE);
->>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
                     break;
             }
         }
    }
 
-<<<<<<< HEAD
-=======
    
 
->>>>>>> 931cae4ede87c08f24b1fd4488c8c012ce7fed24
     return 0;
 }
