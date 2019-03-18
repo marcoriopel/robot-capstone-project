@@ -28,32 +28,33 @@ int main()
 
     bool progEstCommence = false;
 
-    uint8_t* instruction; //Variable pour entreposer 
-    uint8_t* operande;
+    uint8_t instruction; //Variable pour entreposer 
+    uint8_t operande;
+
+    uint8_t nIterations = 0;
+    uint8_t tampon;
+    uint16_t adresseBoucle;
+    int iBoucle;
 
    for (int i = 0; i < (size - 2)/2; ++i)
-   {
-       bool estDansBoucle = false;
-       int nIterations = 0;
-       uint16_t adresseBoucle;
+   {  
+       memoire.lecture(adresse++, &instruction);
+       transmissionUART(instruction);
+       memoire.lecture(adresse++, &operande);
+       transmissionUART(operande);
 
-       memoire.lecture(adresse++, instruction);
-       transmissionUART(*instruction);
-       memoire.lecture(adresse++, operande);
-       transmissionUART(*operande);
+       _delay_ms(2000);
 
-       _delay_ms(5000);
-
-       if (*instruction == 0x01) //Debut
+       if (instruction == 0x01) //Debut
         {
             progEstCommence = true;
         }
         else if (progEstCommence)
         {
-            switch (*instruction)
+            switch (instruction)
             {
                 
-                case 0x02: for (int i = 0; i < *operande; ++i)   //attendre (att)
+                case 0x02: for (int i = 0; i < operande; ++i)   //attendre (att)
                            {  
                                 _delay_ms(25);
                            } 
@@ -65,7 +66,7 @@ int main()
                 case 0x45: allumerDEL(ETEINT); //eteindre la DEL (det)
                     break;
 
-                case 0x48: allumerSon(*operande); //jouer la sonorite (sgo)
+                case 0x48: allumerSon(operande); //jouer la sonorite (sgo)
                     break;
 
                 case 0x09: arreterSon(); //arreter de jouer la sonorite (sar)
@@ -107,14 +108,17 @@ int main()
                     _delay_ms(100);
                     break;
 
-                case 0xC0: nIterations = *operande; //debut de boucle (dbc)
+                case 0xC0: nIterations = operande; //debut de boucle (dbc)
                            adresseBoucle = adresse;
-                    break;
+                           iBoucle = i;
+                   break;
 
                 case 0xC1: if (nIterations != 0) //fin de boucle (fbc)
                            {
                                 --nIterations;
+                                
                                 adresse = adresseBoucle;
+                                i = iBoucle;
                            }
                     break;
 
