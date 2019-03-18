@@ -42,12 +42,21 @@ void ajustementPWM (uint8_t pourcentageRoueA, uint8_t pourcentageRoueB)
 
 }
 
-
-
+void definitionPORTD()
+{
+    _delay_ms(10);
+    DDRD = 0b11111111;
+    PORTD = 0b00000000;
+}
 void ajustementDirectionRoues ( bool roueAAvance, bool roueBAvance ) 
 {
-    PORTD |=   roueAAvance << PIND7 | roueBAvance << PIND6;
-    PORTD &= ~(roueAAvance << PIND7 | roueBAvance << PIND6);
+    #define MON_PORT PORTB
+    #define MON_DDR DDRB
+    
+    //DDRD = 0b11111111;
+    MON_PORT = 0b10000000;
+    //PORTD =   0b00000000 ;
+    //PORTD &= ~(roueBAvance << PIND7 | roueBAvance << PIND6);
 }
 
 

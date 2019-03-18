@@ -17,19 +17,16 @@
  * #####            des moteurs du robot          #####
  * ####################################################
  */
-
+#pragma once
 
 
 /*
 *    Ajustement du signal PWM pour chacune des roues 
 *    du robot en fonction d'un pourcentage respectif
 */
-#pragma once
-
-
 void ajustementPWM (uint8_t pourcentageRoueA, uint8_t pourcentageRoueB); 
 
-
+void definitionPORTD();
 
 /*
 *    Ajustement de la direction des roues du robot en fonction 

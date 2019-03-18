@@ -1,3 +1,4 @@
+#define F_CPU 8000000UL
 #include <avr/io.h>
 #include <stdint.h>
 #include "memoire_24.h"
@@ -9,6 +10,7 @@
 #include "UART.h"
 #include "son.h"
 #include <util/delay.h>
+
 
 
 int main()
@@ -54,7 +56,7 @@ int main()
             switch (instruction)
             {
                 
-                case 0x02: for (int i = 0; i < operande; ++i)   //attendre (att)
+                case 0x02: for (int j = 0; j < operande; ++j)   //attendre (att)
                            {  
                                 _delay_ms(25);
                            } 
@@ -84,28 +86,30 @@ int main()
 
                 case '\x62': //avancer (mav)
                     DDRD = 0b11111111;
-                    allumerDEL(ROUGE);
                     ajustementDirectionRoues(true, true); //Les roues avancent
-                    ajustementPWM((*operande/255)*100,(*operande/255)*100);
+                    ajustementPWM((operande/255)*100,(operande/255)*100);
                     break;
 
                 case '\x63': //reculer (mre)
                     DDRD = 0b11111111;
-                    allumerDEL(AMBRE);
                     ajustementDirectionRoues(false, false); //Les roues avancent
-                    ajustementPWM((*operande/255)*100,(*operande/255)*100);
+                    ajustementPWM((operande/255)*100,(operande/255)*100);
                     break;
 
                 case '\x64': //touner a droite (trd)
-                    ajustementDirectionRoues(false, true);
-                    ajustementPWM(10, 10);
-                    _delay_ms(100);
+                    DDRD = 0b11111111;
+                    ajustementDirectionRoues(true, true);
+                    ajustementPWM(0, 50);
+                    _delay_ms(2400);
+                    ajustementPWM(0, 0);
                     break;
 
                 case '\x65': //tourner a gauche (trg)
-                    ajustementDirectionRoues(true, false);
-                    ajustementPWM(10, 10);
-                    _delay_ms(100);
+                    DDRD = 0b11111111;
+                    ajustementDirectionRoues(true, true);
+                    ajustementPWM(50, 0);
+                    _delay_ms(2400);
+                    ajustementPWM(0, 0);
                     break;
 
                 case 0xC0: nIterations = operande; //debut de boucle (dbc)
