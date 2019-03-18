@@ -72,9 +72,13 @@ int main()
                     break;
 
                 case '\x60': //arreter les moteurs (mar)
+                    ajustementPWM(0, 0);
+
                     break;
 
                 case '\x61': //arreter les moteurs (mar)
+                    ajustementPWM(0, 0);
+
                     break;
 
                 case '\x62': //avancer (mav)
@@ -92,9 +96,15 @@ int main()
                     break;
 
                 case '\x64': //touner a droite (trd)
+                    ajustementDirectionRoues(false, true);
+                    ajustementPWM(10, 10);
+                    _delay_ms(100);
                     break;
 
                 case '\x65': //tourner a gauche (trg)
+                    ajustementDirectionRoues(true, false);
+                    ajustementPWM(10, 10);
+                    _delay_ms(100);
                     break;
 
                 case 0xC0: nIterations = *operande; //debut de boucle (dbc)

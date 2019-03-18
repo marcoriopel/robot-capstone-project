@@ -46,8 +46,8 @@ void ajustementPWM (uint8_t pourcentageRoueA, uint8_t pourcentageRoueB)
 
 void ajustementDirectionRoues ( bool roueAAvance, bool roueBAvance ) 
 {
-    PORTD |=   roueAAvance << PIND7 | roueAAvance << PIND6;
-    PORTD &= ~(roueAAvance << PIND7 | roueAAvance << PIND6);
+    PORTD |=   roueAAvance << PIND7 | roueBAvance << PIND6;
+    PORTD &= ~(roueAAvance << PIND7 | roueBAvance << PIND6);
 }
 
 
