@@ -6,16 +6,17 @@
  */
 
 
-#define F_CPU 8000000UL
 #include <avr/io.h>
-#include <util/delay.h>
+#include <util/delay.h> 
 #include "moteur.h"
+#define F_CPU 8000000UL
+
 
 const uint8_t MOTEUR_ALLUME = 0b00000011;
 const uint8_t MOTEUR_ETEINT = 0;
 
 
-void ajustementPWM ( uint8_t pourcentageRoueA, uint8_t pourcentageRoueB ) 
+void ajustementPWM (uint8_t pourcentageRoueA, uint8_t pourcentageRoueB) 
 {
 
     // mise à un des sorties OC1A et OC1B sur comparaison

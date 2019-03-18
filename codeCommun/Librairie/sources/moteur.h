@@ -27,7 +27,7 @@
 #pragma once
 
 
-void ajustementPWM ( uint8_t pourcentageRoueA, uint8_t pourcentageRoueB ); 
+void ajustementPWM (uint8_t pourcentageRoueA, uint8_t pourcentageRoueB); 
 
 
 
