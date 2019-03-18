@@ -19,7 +19,7 @@ void allumerSon(int position)
 
     uint8_t positionDansTableau = position - premierePosition;
 
-    if(positionDanTableau > 36)
+    if(positionDansTableau > 36)
         return;
 
     TCNT0 = 0; //On reset le compteur si le OCR0A est plus petit que le TCNT0
