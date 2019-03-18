@@ -7,8 +7,9 @@
 #include "DEL.h"
 #include "can.h"
 #include "UART.h"
-#include <util/delay.h>
 #include "son.h"
+#include <util/delay.h>
+
 
 int main()
 {
@@ -78,9 +79,17 @@ int main()
                     break;
 
                 case '\x62': //avancer (mav)
+                    DDRD = 0b11111111;
+                    allumerDEL(ROUGE);
+                    ajustementDirectionRoues(true, true); //Les roues avancent
+                    ajustementPWM((*operande/255)*100,(*operande/255)*100);
                     break;
 
                 case '\x63': //reculer (mre)
+                    DDRD = 0b11111111;
+                    allumerDEL(AMBRE);
+                    ajustementDirectionRoues(false, false); //Les roues avancent
+                    ajustementPWM((*operande/255)*100,(*operande/255)*100);
                     break;
 
                 case '\x64': //touner a droite (trd)
